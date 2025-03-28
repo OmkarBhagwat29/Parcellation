@@ -1,5 +1,5 @@
 import { RiSendPlane2Fill } from "react-icons/ri";
-import { sendToWebView } from "../../webview";
+import { sendToWebView } from "../../../app/webview/webview";
 import { useEffect, useRef, useState } from "react";
 
 const QueryToAi = ({ loading, handleLoadingState }) => {
@@ -39,7 +39,7 @@ const QueryToAi = ({ loading, handleLoadingState }) => {
         <div
           ref={inputRef}
           contentEditable="true"
-          className="text-sm p-1 h-36 border border-gray-500 w-full bg-slate-50 rounded-md cursor-text overflow-y-auto"
+          className="text-sm p-1 h-24 border border-gray-500 w-full bg-slate-50 rounded-md cursor-text overflow-y-auto"
           style={{ whiteSpace: "pre-wrap" }}
           onInput={(e) => setMessage(e.currentTarget.textContent || "")}
         ></div>

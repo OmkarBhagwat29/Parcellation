@@ -1,6 +1,6 @@
 import { debounce } from "lodash";
 import { useState, useCallback } from "react";
-import { sendToWebView } from "../webview";
+import { sendToWebView } from "../../app/webview/webview";
 
 export default function RoadWidthSlider() {
   const [majorRoadWidth, setMajorRoadWidth] = useState(18);
@@ -135,7 +135,9 @@ export default function RoadWidthSlider() {
           <div
             className="absolute text-xs bg-gray-700 text-white px-1 py-0.5 rounded"
             style={{
-              left: `calc(${((minParcelArea - 10) / (1000 - 10)) * 100}% - 5px)`,
+              left: `calc(${
+                ((minParcelArea - 10) / (1000 - 10)) * 100
+              }% - 5px)`,
               top: "-15px",
               whiteSpace: "nowrap",
               minWidth: "max-content",

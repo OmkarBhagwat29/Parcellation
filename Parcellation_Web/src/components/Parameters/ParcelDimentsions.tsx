@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { debounce } from "lodash";
-import { sendToWebView } from "../webview";
-
+import { sendToWebView } from "../../app/webview/webview";
 
 const ParcelDimensions = () => {
   const [parcelDepth, setParcelDepth] = useState(60.0);

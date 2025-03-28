@@ -1,7 +1,8 @@
+import { ReceiveMessageProps } from "@/app/webview/webview";
 import React, { useEffect, useState } from "react";
 
 const InfoDisplay = () => {
-  const [info, setInfo] = useState([]);
+  const [info, setInfo] = useState<string[]>([]);
 
   useEffect(() => {
     if (!window.chrome || !window.chrome.webview) {
@@ -10,17 +11,13 @@ const InfoDisplay = () => {
     }
 
     // Event listener function
-    const messageReceived = (event) => {
-      const data = event.data; // Extract message data
+    const messageReceived = (event: any) => {
+      const data = event.data as ReceiveMessageProps;
+      if (data.eventType === "info_message") {
+        const messageData = data.message as string;
 
-      try {
-        const parsedData = typeof data === "string" ? JSON.parse(data) : data;
-
-        if (parsedData.eventType === "info_message") {
-          setInfo((prev) => [parsedData.message]); // Update state with new message
-        }
-      } catch (error) {
-        console.error("Invalid message received:", error);
+        console.log(messageData);
+        setInfo((prev) => [messageData]);
       }
     };
 

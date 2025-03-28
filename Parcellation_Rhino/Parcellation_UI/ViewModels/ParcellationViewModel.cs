@@ -8,9 +8,9 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using UrbanDesign.AI.Ollama;
 using UrbanDesign.Helper.Inputs;
-using UrbanDesign.Parcellation ;
+using UrbanDesign.Models;
+using UrbanDesign.Parcellation;
 using UrbanDesign.Ui.Helpers;
-using UrbanDesign.Ui.Models;
 
 
 
@@ -23,7 +23,7 @@ namespace UrbanDesign.Ui.ViewModels
         public ParcellationViewModel(WebView2 webView)
         {
             this.WebView = webView;
-
+            ParcellationHelper.View = this.WebView;
             this.WebView.WebMessageReceived += WebView2_WebMessageReceived;
 
             Rhino.RhinoDoc.AddRhinoObject += ParcellationHelper.ObjectModified;
@@ -38,26 +38,6 @@ namespace UrbanDesign.Ui.ViewModels
            RhinoDoc.AddRhinoObject -= ParcellationHelper.ObjectModified;
             RhinoDoc.DeleteRhinoObject -= ParcellationHelper.DeleteRhinoObject;
 
-            foreach (var item in doc.Objects)
-            {
-
-                var roadUserData = item.Geometry.UserData.Find(typeof(RoadObject));
-                if (roadUserData is not null)
-                {
-                    item.Geometry.UserData.Remove(roadUserData);
-                    continue;
-                }
-
-                var parcelUserData = item.Geometry.UserData.Find(typeof(ParcelObject));
-
-
-                if (parcelUserData is not null)
-                {
-                    item.Geometry.UserData.Remove(parcelUserData);
-
-                }
-
-            }
 
             doc.Views.Redraw();
         }
@@ -93,12 +73,7 @@ namespace UrbanDesign.Ui.ViewModels
                 });
 
 
-                if ((ParcellationHelper.System.Parcel == null || ParcellationHelper.System.Parcel.RoadNetwork == null) && 
-                    (obj.Command!=CommandAction.Select_Parcel && obj.Command != CommandAction.Select_Road_Network) )
-                {
-                    ParcellationHelper.System.Enabled = false;
-                    return;
-                }
+
 
                 switch (obj.Command)
                 {
@@ -112,31 +87,21 @@ namespace UrbanDesign.Ui.ViewModels
                         if (ParcellationHelper.System.Parcel == null)
                             return;
 
-                        {
-                            var res = new { eventType = "info_message", message = $"Parcel Selected!\nArea: {Math.Round(ParcellationHelper.System.Parcel.Props.Area, 2)}" };
+                        ParcellationHelper.SendParcelSelectedInfo();
 
-                            var resString = JsonSerializer.Serialize(res);
-
-                            this.WebView.CoreWebView2.PostWebMessageAsJson(resString);
-                        }
-
+                        ParcellationHelper.SendPieChartInfoOfSubParcelAreaDistribution();
 
                         break;
                     case CommandAction.Select_Road_Network:
-                        //obj.Command.UseCommandAction(SelectRoadNetwork);
+
                         obj.Command.UseCommandAction(ParcellationHelper.SelectRoadNetwork);
                         ParcellationHelper.Evaluate();
 
                         if (ParcellationHelper.System.Parcel.RoadNetwork == null)
                             return;
 
-                        {
-                            var res = new { eventType = "info_message", message = $"{ParcellationHelper.System.Parcel.RoadNetwork.Roads.Count}Roads Selected!" };
+                        ParcellationHelper.SendRoadSelectedInfo();
 
-                            var resString = JsonSerializer.Serialize(res);
-
-                            this.WebView.CoreWebView2.PostWebMessageAsJson(resString);
-                        }
                         break;
                     case CommandAction.Major_Road_Width:
                         
@@ -183,22 +148,7 @@ namespace UrbanDesign.Ui.ViewModels
 
                         break;
                     case CommandAction.CITY_GREEN_POINTS:
-                        var pointObjs = RhinoSelect.SelectObjects("Select Green Points", Rhino.DocObjects.ObjectType.Point);
-
-                        if (pointObjs == null)
-                            return;
-
-                        var greenPoints = pointObjs.Select(o => {
-
-                           var userObj = o.Geometry().UserData.Find(typeof(GreenPointObject));
-
-                            if (userObj == null)
-                            {
-                                o.Geometry().UserData.Add(new GreenPointObject { IsGreenPoint = true,GreenZonId=Guid.NewGuid() });
-                            }
-
-                            return o.Point().Location;
-                        }).ToList();
+                        ParcellationHelper.SelectGreenZones();
      
                         break;
                     case CommandAction.Min_Parcel_Area:

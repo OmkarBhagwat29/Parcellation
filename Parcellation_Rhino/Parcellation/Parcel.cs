@@ -1,9 +1,9 @@
-﻿using Grasshopper.Kernel.Geometry.SpatialTrees;
+﻿
 using Rhino.Geometry;
 using System.Text.Json;
-using System.Text.Json.Serialization;
+
 using UrbanDesign.Helper.Geometry;
-using UrbanDesign.Ui.Models;
+
 
 namespace UrbanDesign.Parcellation
 {
@@ -16,6 +16,8 @@ namespace UrbanDesign.Parcellation
 
     public class Parcel
     {
+        static Random rand = new Random(23);
+
         public Parcel? Parent { get; private set; }
         public List<Parcel> Children { get; private set; } = new();
 
@@ -38,6 +40,9 @@ namespace UrbanDesign.Parcellation
 
         public Guid ParcelId = Guid.NewGuid();
 
+        public string DisplayName = "";
+        public string DisplayColor = $"rgb({rand.Next(0, 256)}, {rand.Next(0, 256)}, {rand.Next(0, 256)})";
+
         public Parcel(Curve parcelCurve, AreaMassProperties props, ParcelType type = ParcelType.Residential)
         {
             ParcelCurve = parcelCurve;
@@ -59,6 +64,13 @@ namespace UrbanDesign.Parcellation
             this.SetGeometry();
         }
 
+        public void SetParcelCurve(Curve cv)
+        {
+            this.ParcelCurve = cv;
+            this.Props = AreaMassProperties.Compute(ParcelCurve);
+            this.SetParcelCoords();
+            this.SetGeometry();
+        }
 
         void SetGeometry()
         {
@@ -90,10 +102,11 @@ namespace UrbanDesign.Parcellation
         {
             if (RoadNetwork == null) return;
 
-            SplittedParcelsWithRoads = ParcelCurve
-                .SplitCurveWithCurves(RoadNetwork.Roads.Select(r => r.Curve).ToList())
-                .Where(c => c.IsClosed)
-                .ToList();
+                SplittedParcelsWithRoads = ParcelCurve
+    .SplitCurveWithCurves(RoadNetwork.Roads.Select(r => r.Curve).ToList())
+    .Where(c => c.IsClosed)
+    .ToList();
+
         }
 
         /// <summary>
@@ -103,39 +116,66 @@ namespace UrbanDesign.Parcellation
         {
             if (RoadNetwork == null || SplittedParcelsWithRoads == null) return;
 
+            var children = new List<Parcel>(this.Children);
             Children.Clear();
             if ( this.RoadNetwork.Width > 0)
             {
-                foreach (var splitParcel in SplittedParcelsWithRoads)
-                {
-                    var offsetParcels = splitParcel.Offset(Plane.WorldXY, -RoadNetwork.Width / 2.0, 0.01, CurveOffsetCornerStyle.Sharp);
-
-                    if (offsetParcels?.Length == 1 && offsetParcels[0].IsClosed)
-                    {
-                        var props = AreaMassProperties.Compute(offsetParcels[0]);
-
-                        if (ParcelCurve.Contains(props.Centroid, Plane.WorldXY, 0.01) == PointContainment.Inside)
-                        {
-                            var childParcel = new Parcel(offsetParcels[0], props) { Parent = this };
-                            Children.Add(childParcel);
-                        }
-                    }
-                }
+                AddChildrenByRoadWidth();
             }
             else
             {
-                foreach (var splitParcel in SplittedParcelsWithRoads)
-                {
-                    var props = AreaMassProperties.Compute(splitParcel);
+                this.AddChildrenWithoutRoad();
 
-                    if (ParcelCurve.Contains(props.Centroid, Plane.WorldXY, 0.01) == PointContainment.Inside)
-                    {
-                        var childParcel = new Parcel(splitParcel, props) { Parent = this };
-                        Children.Add(childParcel);
-                    }
+            }
+
+            if (children.Count == this.Children.Count)
+            {
+                //match the colors
+                for (int i = 0; i < this.Children.Count; i++)
+                {
+                    this.Children[i].DisplayColor = children[i].DisplayColor;
                 }
             }
 
+        }
+
+        void AddChildrenWithoutRoad()
+        {
+            foreach (var splitParcel in SplittedParcelsWithRoads)
+            {
+                var props = AreaMassProperties.Compute(splitParcel);
+
+                if (ParcelCurve.Contains(props.Centroid, Plane.WorldXY, 0.01) == PointContainment.Inside)
+                {
+                    var childParcel = new Parcel(splitParcel, props) { Parent = this };
+                    Children.Add(childParcel);
+
+
+                }
+            }
+        }
+        void AddChildrenByRoadWidth()
+        {
+
+            foreach (var splitParcel in SplittedParcelsWithRoads)
+            {
+                var offsetParcels = splitParcel.Offset(Plane.WorldXY, -RoadNetwork.Width / 2.0, 0.01, CurveOffsetCornerStyle.Sharp);
+
+                if (offsetParcels?.Length == 1 && offsetParcels[0].IsClosed)
+                {
+                    var props = AreaMassProperties.Compute(offsetParcels[0]);
+
+                    if (ParcelCurve.Contains(props.Centroid, Plane.WorldXY, 0.01) == PointContainment.Inside)
+                    {
+
+                        var childParcel = new Parcel(offsetParcels[0], props) { Parent = this};
+
+
+                        Children.Add(childParcel);
+
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -227,6 +267,18 @@ namespace UrbanDesign.Parcellation
             };
 
             return parcelJson;
+        }
+
+        private static string GetConsistentColor(Guid id)
+        {
+            int hash = id.GetHashCode();
+
+            // Ensure non-negative values
+            int r = Math.Abs((hash >> 16) & 255);
+            int g = Math.Abs((hash >> 8) & 255);
+            int b = Math.Abs(hash & 255);
+
+            return $"rgb({r},{g},{b})";
         }
     }
 }

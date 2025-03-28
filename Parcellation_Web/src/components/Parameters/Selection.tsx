@@ -1,6 +1,5 @@
 import React from "react";
-import { sendToWebView } from "../webview";
-
+import { sendToWebView } from "../../app/webview/webview";
 
 const Selection = () => {
   const sendMessageToRhino = (

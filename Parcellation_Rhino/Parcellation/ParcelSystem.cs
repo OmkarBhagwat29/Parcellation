@@ -26,6 +26,9 @@ namespace UrbanDesign.Parcellation
                 }
             }
         }
+
+        public List<Point3d> GreenZones = [];
+
         double _subParcelDepth = 60;
 
         public double SubParcelDepth
@@ -90,15 +93,32 @@ namespace UrbanDesign.Parcellation
         public void Evaluate()
         {
 
-
             //sub first parcel
-            this.Parcel.Children.Clear();
+
             this.CreateSubParcelsFromMajorRoads();
+
+            this.ApplyGreenZone();
+
             this.CreateSubParcelsFromMinorRoads();
 
         }
 
+        public void ApplyGreenZone()
+        {
+            this.Parcel.Children.ForEach(child => {
 
+                if (this.GreenZones.Any(pt => child.ParcelCurve.Contains(pt, Plane.WorldXY, 0.01) == PointContainment.Inside))
+                {
+                    child.Type = ParcelType.Green;
+                    child.Children.Clear();
+                }
+                else
+                {
+                    child.Type = ParcelType.Residential;
+                }
+
+            });
+        }
 
         public void CreateSubParcelsFromMajorRoads()
         {
@@ -108,17 +128,46 @@ namespace UrbanDesign.Parcellation
             this.Parcel.SetSplitParcelWithRoadNetwork();
             this.Parcel.SetChildrenByRoadWidth();
 
+
         }
+
         List<Parcel> _allSubParcels = [];
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="level">level 1 => Main Boundary
+        /// Level 2 => Parcels splited by Major Roads
+        /// Level 3 = Parcels splited by Minor Roads
+        /// Level 4 = Building Parcels
+        /// </param>
+        /// <returns></returns>
+        public List<Parcel> GetParcelsOnLevel(int level)
+        {
+            if (level == 1)
+            {
+                return new List<Parcel>() { this.Parcel };
+            }
+            else if (level == 2)
+            {
+                return this.Parcel.Children;
+            }
+            else if (level == 3)
+            {
+                return this.Parcel.Children.SelectMany(child => child.Children).ToList();
+            }
+            else if (level == 4)
+            {
+                return this.Parcel.Children.SelectMany(child => child.Children.SelectMany(ch => ch.Children)).ToList();
+            }
+            else
+                return [];
+        }
 
 
         public void CreateBuildingParcels()
         {
             
-
-
             if (this.Attractor is null)
             {
                 double depth = this.BuildingPlotDepth;
@@ -182,7 +231,7 @@ namespace UrbanDesign.Parcellation
             if (this.Parcel == null)
                 return;
             this.Parcel.Children.ForEach(child => {
-
+                
                 child.SetRoadNetworkBasedOnParcelChildrenSize(this.SubParcelDepth, this.SubParcelWidth, false);
 
                 child.RoadNetwork.Width = this.MinorRoadWidth;
@@ -248,18 +297,17 @@ namespace UrbanDesign.Parcellation
 
 
         #region Display
-        protected override void DrawForeground(DrawEventArgs e)
+        protected override void PostDrawObjects(DrawEventArgs e)
         {
-            {
+            //main parcel as road
+            e.Display.DrawBrepShaded(this.Parcel.Geometry, new DisplayMaterial(Color.Gray));
+            //Display Children Parcel
+            DisplayChildren(e, this.Parcel, 1);
 
-                //Display Children Parcel
-                DisplayChildren(e, this.Parcel,1);
 
 
 
-                //this._greenPoints.ForEach(zPt => e.Display.DrawBrepShaded(new Sphere(zPt, 15).ToBrep(),
-                //        new DisplayMaterial(Color.DarkGreen)));
-                if (this.Parcel.RoadNetwork is not null)
+            if (this.Parcel.RoadNetwork is not null)
                 {
                     foreach (var c in this.Parcel.RoadNetwork.Roads)
                     {
@@ -267,50 +315,41 @@ namespace UrbanDesign.Parcellation
                     }
                 }
 
+
+                this.GreenZones.ForEach(zPt => e.Display.DrawPoint(zPt,PointStyle.Circle,10, Color.DarkSlateBlue));
+
+
                 if (this.Attractor is not null)
                 {
                     e.Display.DrawPoint(this.Attractor.Value,PointStyle.Circle,10,Color.Red);
                 }
 
-
-            }
-
         }
 
         static void DisplayChildren(DrawEventArgs e, Parcel parcel,int depth)
         {
+
+
             for (int i = 0; i < parcel.Children.Count; i++)
             {
                 if (parcel.Children[i].Type == ParcelType.Residential)
                 {
-                    if (depth == 1)
+                    if (depth == 3)
                     {
-                        e.Display.DrawBrepShaded(parcel.Children[i].Geometry,new DisplayMaterial(Color.Black));
-                    }
-                    else if (depth == 2)
-                    {
-                    //    e.Display.DrawCurve(parcel.Children[i].ParcelCurve,
-                    //new DisplayPen() { Color = Color.Black, Thickness = 2 });
-
-                    //    e.Display.Draw3dText(new Text3d($"P_{i}", Plane.WorldXY, 5), Color.Red, parcel.Children[i].Props.Centroid);
-                    }
-                    else if (depth == 3)
-                    {
-                        e.Display.DrawCurve(parcel.Children[i].ParcelCurve,
-                        new DisplayPen() { Color = Color.Black, Thickness = 1 });
-
                         e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.White));
+                        e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.Black, 2);
                     }
 
 
                     DisplayChildren(e, parcel.Children[i], depth + 1);
                 }
-                else if (parcel.Children[i].Type==ParcelType.Green)
+                else if (parcel.Children[i].Type == ParcelType.Green)
                 {
                     //e.Display.DrawCurve(parcel.Children[i].ParcelCurve,
                     //new DisplayPen() { Color = Color.Green, Thickness = 3 });
 
                     e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.LightGreen));
+                    e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.DarkGreen, 1);
                 }
             }
 

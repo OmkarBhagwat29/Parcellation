@@ -1,7 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from "react";
 import { debounce } from "lodash";
-import { sendToWebView } from "../webview";
-
+import { sendToWebView } from "../../app/webview/webview";
 
 const RangeSlider = ({
   id,
@@ -85,7 +84,9 @@ const RangeSlider = ({
         {["start", "end"].map((handle) => (
           <button
             key={handle}
-            className={`absolute w-4 h-4 top-1/2 -ml-3 -translate-y-1/2 bg-gray-700 rounded-full shadow-lg focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 ${isDragging === handle ? "scale-110" : ""} hover:scale-110 transition-transform`}
+            className={`absolute w-4 h-4 top-1/2 -ml-3 -translate-y-1/2 bg-gray-700 rounded-full shadow-lg focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 ${
+              isDragging === handle ? "scale-110" : ""
+            } hover:scale-110 transition-transform`}
             style={{ left: `${values[handle]}%` }}
             onMouseDown={handleMouseDown(handle)}
             onMouseEnter={() =>

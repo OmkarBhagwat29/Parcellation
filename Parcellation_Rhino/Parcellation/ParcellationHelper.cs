@@ -1,24 +1,31 @@
 ﻿
-using Microsoft.Web.WebView2.Core;
+using Eto.Forms;
+using Microsoft.Web.WebView2.Wpf;
+using Rhino.DocObjects;
 using Rhino.DocObjects.Custom;
 using Rhino.Geometry;
+using Rhino.Input.Custom;
+using Rhino.UI;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
-using System.Windows;
 using UrbanDesign.Helper.Inputs;
-using UrbanDesign.Ui.Models;
+using UrbanDesign.Models;
+
 
 
 namespace UrbanDesign.Parcellation
 {
     public static class ParcellationHelper
     {
-        public static ParcelSystem System = new ();
+        public static ParcelSystem System = new();
+        public static WebView2 View;
 
         public static object GetSystemJson()
         {
             return System.ToBuildingsParcelJson();
         }
 
+        #region Selection
         public static void SelectParcel()
         {
             var crvObj = RhinoSelect.SelectCurve("Select a Parcel Boundary");
@@ -34,7 +41,7 @@ namespace UrbanDesign.Parcellation
 
             if (crv.IsClosed)
             {
-                if(userData is null)
+                if (userData is null)
                     crv.UserData.Add(new ParcelObject { IsParcelObject = true });
 
                 //WebView.CoreWebView2.PostWebMessageAsString($"Parcel Selected with Area: " +
@@ -57,7 +64,8 @@ namespace UrbanDesign.Parcellation
 
             if (crvs.Count > 0)
             {
-                crvs.ForEach(c => {
+                crvs.ForEach(c =>
+                {
 
                     var userData = c.UserData.Find(typeof(RoadObject));
 
@@ -74,6 +82,62 @@ namespace UrbanDesign.Parcellation
             }
         }
 
+
+        public static void SelectCityAttractor()
+        {
+            var pointObj = RhinoSelect.SelectObject("Select Attractor Point", Rhino.DocObjects.ObjectType.Point);
+
+
+            if (pointObj == null)
+                return;
+
+            var point = pointObj.Point().Location;
+
+            var att = pointObj.Geometry().UserData.Find(typeof(AttractorObject));
+
+            if (att == null)
+                pointObj.Geometry().UserData.Add(new AttractorObject { IsAttractor = true });
+
+            System.Attractor = point;
+
+            if (System.Parcel is null || System.Parcel.RoadNetwork is null)
+                return;
+
+            System.CreateBuildingParcels();
+        }
+
+        public static void SelectGreenZones()
+        {
+            var pointObjs = RhinoSelect.SelectObjects("Select Green Points", Rhino.DocObjects.ObjectType.Point);
+
+            if (pointObjs == null || pointObjs.Length == 0)
+                return;
+
+            var points = pointObjs.Select(pObj => pObj.Point().Location);
+
+            pointObjs.ToList().ForEach(ptObj =>
+            {
+
+                var att = ptObj.Geometry().UserData.Find(typeof(GreenPointObject));
+
+                if (att == null)
+                    ptObj.Geometry().UserData.Add(new GreenPointObject { IsGreenPoint = true, GreenZonId = Guid.NewGuid() });
+
+            });
+
+            System.GreenZones = points.ToList();
+
+            if (System.Parcel is null || System.Parcel.RoadNetwork is null)
+                return;
+
+            System.ApplyGreenZone();
+            System.CreateSubParcelsFromMinorRoads();
+
+        }
+
+        #endregion
+
+        #region Functionality
         public static void Evaluate()
         {
             if (System.Parcel.RoadNetwork == null || System.Parcel == null)
@@ -81,6 +145,8 @@ namespace UrbanDesign.Parcellation
 
             System.Enabled = true;
             System.Evaluate();
+            //SendPieChartInfoOfSubParcelAreaDistribution();
+            SendPieCharInfoOfParcelTypeAreaDistribution();
         }
 
         public static void Reset()
@@ -94,8 +160,6 @@ namespace UrbanDesign.Parcellation
             System.Enabled = !visibility;
         }
 
-
-
         public static void SetMinimumSubParcelArea(double area)
         {
             System.MinimumSubParcelArea = area;
@@ -106,13 +170,13 @@ namespace UrbanDesign.Parcellation
         public static void SetMajorRoadWidth(double roadWidth)
         {
             System.MajorRoadWidth = roadWidth;
-            System.Evaluate();
+            Evaluate();
         }
 
         public static void SetMinorRoadWidth(double roadWidth)
         {
             System.MinorRoadWidth = roadWidth;
-           System.CreateSubParcelsFromMinorRoads();
+            System.CreateSubParcelsFromMinorRoads();
         }
 
         public static void SetSubParcelSize(double depth, double width)
@@ -120,7 +184,7 @@ namespace UrbanDesign.Parcellation
             System.SubParcelDepth = depth;
             System.SubParcelWidth = width;
 
-   
+
             System.CreateSubParcelsFromMinorRoads();
         }
 
@@ -149,24 +213,8 @@ namespace UrbanDesign.Parcellation
             System.CreateBuildingParcels();
         }
 
-        public static void SelectCityAttractor()
-        {
-            var pointObj = RhinoSelect.SelectObject("Select Attractor Point", Rhino.DocObjects.ObjectType.Point);
+        #endregion
 
-
-            if (pointObj == null)
-                return;
-
-            var point = pointObj.Point().Location;
-
-            var att = pointObj.Geometry().UserData.Find(typeof(AttractorObject));
-
-            if (att == null)
-                pointObj.Geometry().UserData.Add(new AttractorObject { IsAttractor = true });
-
-            System.Attractor = point;
-            System.CreateBuildingParcels();
-        }
 
         #region interaction
         public static void ObjectModified(object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
@@ -187,9 +235,9 @@ namespace UrbanDesign.Parcellation
 
             if (attractorData != null)
             {
-                if (obj.Geometry is Rhino.Geometry.Point point)
+                if (obj.Geometry is Point point)
                 {
-                   System.Attractor = point.Location; // extracts the point3d
+                    System.Attractor = point.Location; // extracts the point3d
                     System.CreateBuildingParcels();
                 }
                 return;
@@ -205,11 +253,11 @@ namespace UrbanDesign.Parcellation
                 if (obj.Geometry is Curve c)
                 {
                     var roadNetwork = System.Parcel.RoadNetwork;
-                    System.Parcel = new Parcel(c);
+                    System.Parcel.SetParcelCurve(c);
                     System.Parcel.RoadNetwork = roadNetwork;
 
                     System.Evaluate();
-
+                    SendPieCharInfoOfParcelTypeAreaDistribution();
                 }
                 return;
             }
@@ -224,10 +272,22 @@ namespace UrbanDesign.Parcellation
                 var roads = System.Parcel.RoadNetwork.Roads;
                 roads.Add(new Road(cv));
                 System.Parcel.RoadNetwork = new RoadNetwork(roads);
-                    System.Evaluate();
-                
+                System.Evaluate();
+                SendPieCharInfoOfParcelTypeAreaDistribution();
 
                 return;
+            }
+
+            if (greenData is not null)
+            {
+                var pt = obj.Geometry as Point;
+                System.GreenZones.Add(pt.Location);
+
+                System.ApplyGreenZone();
+
+                System.CreateSubParcelsFromMinorRoads();
+                SendPieCharInfoOfParcelTypeAreaDistribution();
+
             }
 
         }
@@ -236,31 +296,37 @@ namespace UrbanDesign.Parcellation
         public static void DeleteRhinoObject(object sender, Rhino.DocObjects.RhinoObjectEventArgs e)
         {
 
+
+            RemoveRoad(e);
+
+
+            RemoveGreenPoint(e);
+
+        }
+
+        static void RemoveGreenPoint(RhinoObjectEventArgs e)
+        {
             var obj = e.TheObject;
+            var greenData = obj.Geometry.UserData.Find(typeof(GreenPointObject)) as GreenPointObject;
 
 
-           RemoveRoad(e);
-
-           // var greenData = obj.Geometry.UserData.Find(typeof(GreenPointObject)) as GreenPointObject;
-
-
-            //if (greenData != null)
-            //{
-            //    if (obj.Geometry is Point pt)
-            //    {
-            //        var greenPt = _parcellation.GreenPoints.Where(p => p.CompareTo(pt.Location) == 0).FirstOrDefault();
+            if (greenData != null)
+            {
+                if (obj is PointObject ptObj)
+                {
+                    var pt = ptObj.Geometry as Point;
+                    var greenPt = System.GreenZones.FirstOrDefault(gZ =>
+                    {
 
 
-            //        _parcellation.GreenPoints.Remove(greenPt);
+                        return gZ.CompareTo(pt.Location) == 0;
 
+                    });
+                    if (pt != null)
+                        System.GreenZones.Remove(greenPt);
+                }
 
-            //    }
-            //    return;
-            //}
-
-
-
-
+            }
         }
 
 
@@ -296,6 +362,148 @@ namespace UrbanDesign.Parcellation
 
         #endregion
 
+
+        #region WebViewHelper
+
+        public static void SendParcelSelectedInfo()
+        {
+            var res = new { eventType = "info_message", message = $"Parcel Selected!\nArea: {Math.Round(System.Parcel.Props.Area, 2)}" };
+
+            var resString = JsonSerializer.Serialize(res);
+
+            View.CoreWebView2.PostWebMessageAsJson(resString);
+        }
+
+        public static void SendRoadSelectedInfo()
+        {
+            var res = new { eventType = "info_message", message = $"{System.Parcel.RoadNetwork.Roads.Count} Roads Selected!" };
+
+            var resString = JsonSerializer.Serialize(res);
+
+            View.CoreWebView2.PostWebMessageAsJson(resString);
+        }
+
+        public static void SendPieChartInfoOfSubParcelAreaDistribution()
+        {
+            //parcel by manjor roads
+            var parcels = System.GetParcelsOnLevel(2);
+
+
+            if (parcels.Count == 0)
+                return;
+
+            var total = parcels.Sum(p => p.Props.Area);
+
+            var labels = Enumerable.Range(0, parcels.Count).Select(i => "zone_"+i.ToString()+$": {Math.Round(100.0*(parcels[i].Props.Area/total),2)}%").ToList();
+
+            var dataSet = new Dataset()
+            {
+                Label = "area",
+                Data = Enumerable.Range(0, parcels.Count)
+                .Select(i => Math.Round(parcels[i].Props.Area,2))
+                .ToList(),
+                BackgroundColor = Enumerable.Range(0, parcels.Count)
+        .Select(i => parcels[i].DisplayColor)
+        .ToList(),
+                HoverOffset = 4
+
+            };
+
+
+            var pieChartData = new PieChartProps()
+            {
+                Labels = labels,
+                Datasets = [dataSet],
+                Title = "Sub Parcel Area Distribution"
+            };
+
+            var req = new { eventType = "pie_chart_data", message = pieChartData };
+
+            var jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Ensures JSON uses lowercase property names
+                WriteIndented = true
+            };
+
+            var pieString = JsonSerializer.Serialize(req,jsonOptions);
+
+
+            View.CoreWebView2.PostWebMessageAsJson(pieString);
+        }
+
+        public static void SendPieCharInfoOfParcelTypeAreaDistribution()
+        {
+            //parcel by manjor roads
+            var minorRoadParcels = System.GetParcelsOnLevel(3);
+            var majorRoadParcels = System.GetParcelsOnLevel(2);
+
+
+            if (minorRoadParcels.Count == 0)
+                return;
+
+            var greenParcels = majorRoadParcels.Where(p => p.Type == ParcelType.Green).ToList();
+
+            minorRoadParcels.ForEach(p => {
+                if (p.Type == ParcelType.Green)
+                {
+                    greenParcels.Add(p);
+                }
+            
+            });
+
+            var residentialParcels = minorRoadParcels.Where(p => p.Type == ParcelType.Residential);
+
+            var greenTotalArea = greenParcels.Sum(p => p.Props.Area);
+
+            var resTotalArea = residentialParcels.Sum(p => p.Props.Area);
+
+            var roadArea = System.Parcel.Props.Area - (greenTotalArea + resTotalArea);
+
+            var totalArea = System.Parcel.Props.Area;
+
+
+
+            var title = "Zone Area Distribution";
+            var labels = new List<string>()
+            {
+                $"Green Zone: {Math.Round(100.0*(greenTotalArea/totalArea),2)}%",
+                $"Residential Zone: {Math.Round(100.0*(resTotalArea/totalArea),2)}%",
+                $"Roads: {Math.Round(100.0*(roadArea/totalArea),2)}%"
+            };
+
+
+            var dataSet = new Dataset()
+            {
+                Label = "area",
+                Data = new List<double>() { Math.Round(greenTotalArea,2),Math.Round(resTotalArea,2),Math.Round(roadArea,2)},
+                BackgroundColor = new List<string>() { "rgb(34, 139, 34)","rgb(255,215,0)", "rgb(156,156,156)" },
+                HoverOffset = 4
+
+            };
+
+
+            var pieChartData = new PieChartProps()
+            {
+                Labels = labels,
+                Datasets = [dataSet],
+                Title = title
+            };
+
+            var req = new { eventType = "pie_chart_data", message = pieChartData };
+
+            var jsonOptions = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Ensures JSON uses lowercase property names
+                WriteIndented = true
+            };
+
+            var pieString = JsonSerializer.Serialize(req, jsonOptions);
+
+
+            View.CoreWebView2.PostWebMessageAsJson(pieString);
+        }
+
+        #endregion
     }
 
 
@@ -336,5 +544,14 @@ namespace UrbanDesign.Parcellation
         public bool IsGreenPoint { get; set; } = false;
         public Guid GreenZonId;
         public override bool ShouldWrite => true;
+
+        protected override void OnDuplicate(UserData source)
+        {
+            if (source is GreenPointObject src)
+            {
+                GreenZonId = src.GreenZonId;
+                IsGreenPoint = src.IsGreenPoint;
+            }
+        }
     }
 }

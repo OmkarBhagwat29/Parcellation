@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 
-const ResponseFromAi = ({ loading, setLoading }) => {
+interface ResponseFromAiProps {
+  loading: boolean;
+  setLoading: (loading: boolean) => void;
+}
+
+const ResponseFromAi = ({ loading, setLoading }: ResponseFromAiProps) => {
   const [response, setResponse] = useState(""); // Stores full AI response
   const [displayText, setDisplayText] = useState(""); // Simulated typing text
   const [index, setIndex] = useState(0); // Tracks current index for typing effect
@@ -10,7 +15,7 @@ const ResponseFromAi = ({ loading, setLoading }) => {
       return;
     }
 
-    const messageReceived = (event) => {
+    const messageReceived = (event: MessageEvent) => {
       const data = event.data;
 
       try {
@@ -46,18 +51,17 @@ const ResponseFromAi = ({ loading, setLoading }) => {
   }, [index, response]);
 
   return (
-    <div className="w-full p-2 rounded-md bg-slate-50 border border-gray-500 flex-[0.75]">
+    <div className="w-full h-full p-2 rounded-md bg-slate-50 border border-gray-500">
       <div
-        className="text-sm overflow-y-auto select-text"
-        style={{ whiteSpace: "pre-wrap", maxHeight: "375px" }}
+        className="text-sm overflow-y-auto select-text h-full"
+        style={{ whiteSpace: "pre-wrap" }}
       >
         {loading ? (
-          <div className="flex justify-center items-center">
-            {/* You can replace this with any loading spinner or animation */}
+          <div className="flex justify-center items-center h-full">
             <span>Thinking...</span>
           </div>
         ) : (
-          displayText // Show the simulated typing text after response
+          displayText
         )}
       </div>
     </div>
