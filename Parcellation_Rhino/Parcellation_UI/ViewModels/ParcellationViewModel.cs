@@ -179,7 +179,7 @@ namespace UrbanDesign.Ui.ViewModels
                         var aiMessage = obj.Payload.Value.Deserialize<AIMessage>();
 
                         //var info = ParcellationHelper.GetSystemJson();
-                        var query = $"\n{aiMessage.message}";
+                        var query = $"{aiMessage.message}";
 
                         OllamaHelper.GetOllamaResponse(query, "", this.SendAiResponseToUI);
 
