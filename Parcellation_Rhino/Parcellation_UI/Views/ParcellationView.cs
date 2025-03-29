@@ -2,7 +2,7 @@
 using Eto.Forms;
 using Eto.Wpf.Forms.Controls;
 using Microsoft.Web.WebView2.Wpf;
-
+using System;
 using UrbanDesign.Ui.ViewModels;
 
 
@@ -45,8 +45,6 @@ namespace UrbanDesign.Ui.Views
             this._vm = new ParcellationViewModel(webView);
 
         }
-
-
 
     }
 }

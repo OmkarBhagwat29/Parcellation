@@ -138,6 +138,7 @@ namespace UrbanDesign.Parcellation
         #endregion
 
         #region Functionality
+
         public static void Evaluate()
         {
             if (System.Parcel.RoadNetwork == null || System.Parcel == null)
@@ -155,9 +156,12 @@ namespace UrbanDesign.Parcellation
             System = new();
         }
 
+       
         public static void Hide(bool visibility)
         {
             System.Enabled = !visibility;
+
+            Rhino.RhinoDoc.ActiveDoc.Views.Redraw();
         }
 
         public static void SetMinimumSubParcelArea(double area)

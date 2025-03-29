@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UrbanDesign.AI
+namespace UrbanDesign.AI.Ollama
 {
     public record ChatRequest(string Model,List<Message>Messages,bool Stream);
 

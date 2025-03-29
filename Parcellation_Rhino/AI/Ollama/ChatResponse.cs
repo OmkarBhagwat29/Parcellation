@@ -8,5 +8,5 @@ namespace UrbanDesign.AI.Ollama
 {
     public record ChatResponse();
 
-    public record ChatMessage(string role,string content);
+    public record ChatMessage(string role, string content);
 }

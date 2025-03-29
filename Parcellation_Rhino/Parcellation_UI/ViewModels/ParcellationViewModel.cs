@@ -1,13 +1,12 @@
-﻿using Eto.Forms;
+﻿
+
 using Microsoft.Web.WebView2.Wpf;
+using Parcellation.AI;
 using Rhino;
-using Rhino.DocObjects;
-using Rhino.DocObjects.Custom;
-using Rhino.Geometry;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using UrbanDesign.AI.Ollama;
-using UrbanDesign.Helper.Inputs;
+
+using UrbanDesign.AI;
+
+
 using UrbanDesign.Models;
 using UrbanDesign.Parcellation;
 using UrbanDesign.Ui.Helpers;
@@ -20,6 +19,12 @@ namespace UrbanDesign.Ui.ViewModels
         RhinoDoc doc = RhinoDoc.ActiveDoc;
         public WebView2 WebView { get; set; }
 
+        Functions _functions = new Functions();
+
+        OllamaApiClient _ollama = new OllamaApiClient(new Uri("http://localhost:11434"));
+
+        ChatRequestBuilder _request = new ChatRequestBuilder();
+
         public ParcellationViewModel(WebView2 webView)
         {
             this.WebView = webView;
@@ -28,6 +33,10 @@ namespace UrbanDesign.Ui.ViewModels
 
             Rhino.RhinoDoc.AddRhinoObject += ParcellationHelper.ObjectModified;
             RhinoDoc.DeleteRhinoObject += ParcellationHelper.DeleteRhinoObject;
+
+
+            _request.SetModel("urban")
+                .AddFunctions(_functions);
         }
 
 
@@ -181,7 +190,13 @@ namespace UrbanDesign.Ui.ViewModels
                         //var info = ParcellationHelper.GetSystemJson();
                         var query = $"{aiMessage.message}";
 
-                        OllamaHelper.GetOllamaResponse(query, "", this.SendAiResponseToUI);
+                        //OllamaHelper.GetOllamaResponse(query, "", this.SendAiResponseToUI);
+
+                       
+
+                        OllamaHelper.OllamaFunctionCall(_functions, _request, _ollama, query, this.SendAiResponseToUI);
+
+
 
                         break;
                     default:

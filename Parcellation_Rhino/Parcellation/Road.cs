@@ -8,4 +8,5 @@ namespace UrbanDesign.Parcellation
         public Curve Curve { get; } = curve;
 
     }
+
 }
