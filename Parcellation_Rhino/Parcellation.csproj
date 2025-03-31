@@ -36,7 +36,7 @@
   </ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\LMFunctionSourceGenerator\LMFunctionSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
+		<ProjectReference Include="..\LMFunctionSourceGenerator\LMFunctionSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
 	</ItemGroup>
   
   <!-- For Windows only builds -->

@@ -46,7 +46,7 @@ public class FunctionSourceGenerator : IIncrementalGenerator
           {
                public record FunctionDetails(
                    [property: JsonPropertyName("name")] string Name,
-                   [property: JsonPropertyName("parameters")] FunctionParameters FunctionParameters,
+                    [property: JsonPropertyName("parameters")] FunctionParameters? Parameters, // Nullable parameters
                    string Description
                );
           }
@@ -59,7 +59,16 @@ public class FunctionSourceGenerator : IIncrementalGenerator
 
           namespace {{Namespace}}
           {
-          public record FunctionParameters([property: JsonPropertyName("city")] string City);
+          public record FunctionParameters
+          {
+              [property: JsonPropertyName("value")]
+              public string? Value { get; }
+
+              public FunctionParameters(string? value)
+              {
+                  Value = value;
+              }
+          }
 
           }
           """;
@@ -172,32 +181,43 @@ public class FunctionSourceGenerator : IIncrementalGenerator
         context.AddSource($"{partialClassName}.g.cs", SourceText.From(partialClassCode, Encoding.UTF8));
     }
 
-    private static List<(string name, string description)> ExtractFunctionDescriptions(
+    private static List<(string name, string description, bool hasParameters, List<string> parameterTypes)> ExtractFunctionDescriptions(
         ImmutableArray<MethodDeclarationSyntax> methodDeclarations)
     {
-        var functionNames = new List<(string name, string description)>();
+        var functionNames = new List<(string name, string description, bool hasParameters, List<string> parameterTypes)>();
 
-        // Go through all filtered method declarations.
+        // Iterate over all filtered method declarations
         foreach (var methodDeclarationSyntax in methodDeclarations)
         {
-            // 👇🏼 Get attribute property called Function from methodDeclarationSyntax
+            // Get attribute property called "Function"
             var attributeSyntax = methodDeclarationSyntax.AttributeLists
                 .SelectMany(x => x.Attributes)
-                .First(x => x.Name.ToString() == "Function");
+                .FirstOrDefault(x => x.Name.ToString() == "Function");
 
-            var descriptionArgument = attributeSyntax.ArgumentList?.Arguments.First();
+            if (attributeSyntax == null) continue;
+
+            var descriptionArgument = attributeSyntax.ArgumentList?.Arguments.FirstOrDefault();
             if (descriptionArgument == null) continue;
-            
-            // 👇🏼 Get attribute Description property
+
+            // Get attribute "Description" property
             var descriptionLiteral = (LiteralExpressionSyntax)descriptionArgument.Expression;
             var descriptionValue = descriptionLiteral.Token.ValueText;
 
-            functionNames.Add(
-                new ValueTuple<string, string>(methodDeclarationSyntax.Identifier.Text, descriptionValue));
+            // Extract parameter types
+            var parameterTypes = methodDeclarationSyntax.ParameterList.Parameters
+                .Select(p => p.Type?.ToString()) // Get the type of each parameter
+                .Where(type => type != null)    // Filter out null types
+                .ToList();
+
+            // Check if method has parameters
+            bool hasParameters = parameterTypes.Any();
+
+            functionNames.Add((methodDeclarationSyntax.Identifier.Text, descriptionValue, hasParameters, parameterTypes));
         }
 
         return functionNames;
     }
+
 
     private static (StringBuilder functionNamePatternMatching, StringBuilder functionDetails) GenerateFunctionDetails(
         ImmutableArray<MethodDeclarationSyntax> methodDeclarations)
@@ -205,8 +225,8 @@ public class FunctionSourceGenerator : IIncrementalGenerator
         StringBuilder functionNamePatternMatching = new();
         StringBuilder functionDetails = new();
 
-        List<(string name, string description)> functionNames = ExtractFunctionDescriptions(methodDeclarations); 
-        
+        List<(string name, string description, bool hasParameters, List<string> parameterTypes)> functionNames = ExtractFunctionDescriptions(methodDeclarations);
+
         for (var i = 0; i < functionNames.Count; i++)
         {
             var functionNamesIndex = functionNames.Count - 1;
@@ -214,12 +234,58 @@ public class FunctionSourceGenerator : IIncrementalGenerator
             var indentFunctionName = i < functionNamesIndex ? "" : "             ";
             var indentFunctionDetails = i < functionNamesIndex ? "" : "        ";
             var newLine = i < functionNamesIndex ? "\n" : "";
+
+            //functionNamePatternMatching.Append(
+            //    $"{indentFunctionName}\"{functionNames[i].name}\" => {functionNames[i].name}(){separator}{newLine}");
+
+            //{GetParameters(functionNames[i].parameterTypes)}
             functionNamePatternMatching.Append(
-                $"{indentFunctionName}\"{functionNames[i].name}\" => {functionNames[i].name}(){separator}{newLine}");
+    $"{indentFunctionName}\"{functionNames[i].name}\" => {functionNames[i].name}({GetParameters(functionNames[i].parameterTypes)}){separator}{newLine}");
+
+            // Determine the parameter value(s) based on their types
+            string parameters = functionNames[i].hasParameters
+                ? GetFunctionParameters(functionNames[i].parameterTypes)
+                : "null";
+
             functionDetails.Append(
-                $"{indentFunctionDetails}new(\"{functionNames[i].name}\", new FunctionParameters(\"city\"), \"{functionNames[i].description}\"){separator}{newLine}");
+                $"{indentFunctionDetails}new(\"{functionNames[i].name}\", {parameters}, \"{functionNames[i].description}\"){separator}{newLine}");
         }
 
         return (functionNamePatternMatching, functionDetails);
     }
+
+    private static string GetFunctionParameters(List<string> parameterTypes)
+    {
+        var parameters = new List<string>();
+
+        foreach (var paramType in parameterTypes)
+        {
+            string defaultValue = paramType.ToLower() switch
+            {
+                "int" => "0",            // Default value for int
+                "double" => "0.0",       // Default value for double
+                "string" => "\"default\"", // Default value for string (using double quotes for string)
+                _ => "null"              // For any unknown types, use null
+            };
+
+            parameters.Add($"new FunctionParameters({defaultValue})");
+        }
+
+        return string.Join(", ", parameters);
+    }
+
+
+    private static string GetParameters(List<string> parameterTypes)
+    {
+        if (parameterTypes.Count == 0) return ""; // No parameters, return empty string
+
+        // Generate parameter names (e.g., param1, param2, ...)
+        var parameterNames = parameterTypes
+            .Select((type, index) => $"function.Parameters.Value")  // Creating names like param1, param2...
+            .ToArray();
+
+        return string.Join(", ", parameterNames);  // Join them with commas (param1, param2, ...)
+    }
+
+
 }

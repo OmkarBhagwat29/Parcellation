@@ -17,7 +17,7 @@ namespace UrbanDesign.Ui.Views
         public ParcellationView()
         {
             Title = "Parcellation";
-            Resizable = true;
+            Resizable = false;
             WindowStyle = WindowStyle.Default;
             Size = new Eto.Drawing.Size(737, 900);
 

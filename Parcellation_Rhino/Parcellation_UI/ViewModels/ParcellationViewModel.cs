@@ -21,9 +21,7 @@ namespace UrbanDesign.Ui.ViewModels
 
         Functions _functions = new Functions();
 
-        OllamaApiClient _ollama = new OllamaApiClient(new Uri("http://localhost:11434"));
 
-        ChatRequestBuilder _request = new ChatRequestBuilder();
 
         public ParcellationViewModel(WebView2 webView)
         {
@@ -31,14 +29,14 @@ namespace UrbanDesign.Ui.ViewModels
             ParcellationHelper.View = this.WebView;
             this.WebView.WebMessageReceived += WebView2_WebMessageReceived;
 
-            Rhino.RhinoDoc.AddRhinoObject += ParcellationHelper.ObjectModified;
+            RhinoDoc.AddRhinoObject += ParcellationHelper.ObjectModified;
             RhinoDoc.DeleteRhinoObject += ParcellationHelper.DeleteRhinoObject;
 
-
-            _request.SetModel("urban")
+            OllamaHelper.Request.SetModel("llama3.2")
                 .AddFunctions(_functions);
-        }
 
+            
+        }
 
         public void Dispose()
         {
@@ -47,24 +45,10 @@ namespace UrbanDesign.Ui.ViewModels
            RhinoDoc.AddRhinoObject -= ParcellationHelper.ObjectModified;
             RhinoDoc.DeleteRhinoObject -= ParcellationHelper.DeleteRhinoObject;
 
-
             doc.Views.Redraw();
         }
 
-        public void SendAiResponseToUI(string question, string answer)
-        {
-            var response = new
-            {
-                eventType = "ai_response", // Rename 'event' to avoid C# keyword conflict
-                message = $"Your Question:\n{question}\n\n" +
-                 $"Ai Response:\n{answer}\n\n"
-            };
 
-            string jsonResponse = JsonSerializer.Serialize(response);
-
-            this.WebView.CoreWebView2.PostWebMessageAsString(jsonResponse);
-
-        }
 
 
         private void WebView2_WebMessageReceived(object sender, Microsoft.Web.WebView2.Core.CoreWebView2WebMessageReceivedEventArgs e)
@@ -98,7 +82,7 @@ namespace UrbanDesign.Ui.ViewModels
 
                         ParcellationHelper.SendParcelSelectedInfo();
 
-                        ParcellationHelper.SendPieChartInfoOfSubParcelAreaDistribution();
+                        //ParcellationHelper.SendPieChartInfoOfSubParcelAreaDistribution();
 
                         break;
                     case CommandAction.Select_Road_Network:
@@ -158,6 +142,10 @@ namespace UrbanDesign.Ui.ViewModels
                         break;
                     case CommandAction.CITY_GREEN_POINTS:
                         ParcellationHelper.SelectGreenZones();
+
+                        // ParcellationHelper.SetGreenSpacesBasedOnPercentage(55);
+
+                       //ParcellationHelper.SetCommercialTypeByPercentage(15,false);
      
                         break;
                     case CommandAction.Min_Parcel_Area:
@@ -194,7 +182,7 @@ namespace UrbanDesign.Ui.ViewModels
 
                        
 
-                        OllamaHelper.OllamaFunctionCall(_functions, _request, _ollama, query, this.SendAiResponseToUI);
+                        OllamaHelper.OllamaFunctionCall(_functions, query, ParcellationHelper.SendAiResponseToUI);
 
 
 

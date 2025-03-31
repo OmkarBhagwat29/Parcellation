@@ -49,7 +49,7 @@ public class ChatRequestBuilder
 
         var p = new Property();
         p.Type = "string";
-        p.Description = "The city to get the weather for";
+        p.Description = "The parcellation system for urban design";
 
         builder.AddTool(
             "function",
@@ -58,9 +58,9 @@ public class ChatRequestBuilder
             "object",
             new Dictionary<string, Property>()
             {
-                { "city", p }
+                { "value", p }
             },
-            ["city"]);
+            ["value"]);
 
         return builder;
     }

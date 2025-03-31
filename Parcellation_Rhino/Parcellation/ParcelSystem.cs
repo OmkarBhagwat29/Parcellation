@@ -27,6 +27,10 @@ namespace UrbanDesign.Parcellation
             }
         }
 
+        public bool CommercialDistributionBasedOnAttractor = true;
+        public double CommercialPercentage = 0;
+        public double GreenPercentage = 0;
+
         public List<Point3d> GreenZones = [];
 
         double _subParcelDepth = 60;
@@ -188,6 +192,9 @@ namespace UrbanDesign.Parcellation
                 this.AttractorBasedDivision();
             }
 
+            ParcellationHelper.SetCommercialTypeByPercentage(CommercialPercentage, CommercialDistributionBasedOnAttractor);
+            ParcellationHelper.SetOllamaContext();
+
         }
 
         private void AttractorBasedDivision()
@@ -305,8 +312,6 @@ namespace UrbanDesign.Parcellation
             DisplayChildren(e, this.Parcel, 1);
 
 
-
-
             if (this.Parcel.RoadNetwork is not null)
                 {
                     foreach (var c in this.Parcel.RoadNetwork.Roads)
@@ -336,7 +341,7 @@ namespace UrbanDesign.Parcellation
                 {
                     if (depth == 3)
                     {
-                        e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.White));
+                        e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.Yellow));
                         e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.Black, 2);
                     }
 
@@ -350,6 +355,11 @@ namespace UrbanDesign.Parcellation
 
                     e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.LightGreen));
                     e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.DarkGreen, 1);
+                }
+                else if (parcel.Children[i].Type == ParcelType.Commercial)
+                {
+                    e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.Orange));
+                    e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.Black, 2);
                 }
             }
 

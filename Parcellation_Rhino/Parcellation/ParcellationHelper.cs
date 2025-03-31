@@ -1,6 +1,7 @@
 ﻿
 using Eto.Forms;
 using Microsoft.Web.WebView2.Wpf;
+using Rhino;
 using Rhino.DocObjects;
 using Rhino.DocObjects.Custom;
 using Rhino.Geometry;
@@ -8,6 +9,7 @@ using Rhino.Input.Custom;
 using Rhino.UI;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
+using UrbanDesign.AI;
 using UrbanDesign.Helper.Inputs;
 using UrbanDesign.Models;
 
@@ -19,6 +21,7 @@ namespace UrbanDesign.Parcellation
     {
         public static ParcelSystem System = new();
         public static WebView2 View;
+        static Random random = new Random();
 
         public static object GetSystemJson()
         {
@@ -139,6 +142,133 @@ namespace UrbanDesign.Parcellation
 
         #region Functionality
 
+        public static void SetOllamaContext()
+        {
+            var mainParcelObject = new {ParcelArea = System.Parcel.Props.Area, ParcelCenter = System.Parcel.Props.Centroid, Level = "City" };
+
+            var subParcels = System.GetParcelsOnLevel(2);
+            var subParcelObjects = Enumerable.Range(0,subParcels.Count
+                ).Select(index => new {Index =index+1,
+                    ParcelArea = subParcels[index].Props.Area,
+                    ParcelCenter = subParcels[index].Props.Centroid,
+                    ParcelType = subParcels[index].Type, Level = "Zone" })
+                .ToList();
+
+           // var buildingParcels = System.GetParcelsOnLevel(4);
+           // var buildingParcelObjects = buildingParcels.Select(p => new { ParcelArea = p.Props.Area, ParcelCenter = p.Props.Centroid, ParcelType = p.Type }).ToList();
+
+            var obj = new { CityBoundary = mainParcelObject, Zones = subParcelObjects };
+            var contextString = JsonSerializer.Serialize(obj);
+
+            OllamaHelper.Context = contextString;
+
+        }
+
+        public static double SetGreenSpacesBasedOnPercentage(double greenPercentage)
+        {
+            System.GreenPercentage = greenPercentage;
+            var subParcels = System.GetParcelsOnLevel(2);
+            var totalSubParcelArea = subParcels.Sum(p => p.Props.Area);
+
+            // Calculate percentage area for each parcel and sort by descending area
+            var parcelData = subParcels.Select(p => new {Percentage = 100.0 * (p.Props.Area / totalSubParcelArea), Parcel = p })
+                .ToList();
+
+            List<Parcel> selectedParcels = new List<Parcel>();
+            double accumulatedPercentage = 0.0;
+
+            // Greedy selection algorithm: Pick parcels that best help reach the required percentage
+            while (accumulatedPercentage < greenPercentage && parcelData.Count > 0)
+            {
+                // Find the parcel that brings us closest to the target without exceeding too much
+                var bestParcel = parcelData
+                    .OrderBy(p => Math.Abs((accumulatedPercentage + p.Percentage) - greenPercentage))
+                    .FirstOrDefault();
+
+                if (bestParcel == null)
+                    break;
+
+                selectedParcels.Add(bestParcel.Parcel);
+                accumulatedPercentage += bestParcel.Percentage;
+
+                // Remove the selected parcel from available choices
+                parcelData.Remove(bestParcel);
+            }
+
+
+
+            if (selectedParcels.Count > 0)
+            {
+                System.GreenZones.Clear();
+                System.GreenZones = selectedParcels.Select(p => p.Props.Centroid).ToList();
+
+                System.ApplyGreenZone();
+                System.CreateSubParcelsFromMinorRoads();
+            }
+
+            SetCommercialTypeByPercentage(System.CommercialPercentage, System.CommercialDistributionBasedOnAttractor);
+
+
+            return accumulatedPercentage;
+        }
+
+        public static double SetCommercialTypeByPercentage(double commercialPercentage,bool considerAttractor = true)
+        {
+            System.CommercialPercentage = commercialPercentage;
+            var buildingParcels = System.GetParcelsOnLevel(4);
+
+            var totalBuildingArea = buildingParcels.Sum(p => p.Props.Area);
+
+            var existngCommercials = buildingParcels.Where(p => p.Type == ParcelType.Commercial);
+
+            // start assigning commercial type randomly 
+            existngCommercials.ToList().ForEach(c => c.Type = ParcelType.Residential);
+
+
+            if (System.Attractor is not null && considerAttractor)
+            {
+                // start assign commercial type based on attractor
+                buildingParcels = buildingParcels.OrderBy(b => b.Props.Centroid.DistanceToSquared(System.Attractor.Value)).ToList();
+            }
+            else
+            {
+     
+                buildingParcels.Sort((x, y) => random.Next()); // This will shuffle the list
+            }
+
+            double accumulatedPercentage = 0;
+            foreach (var bP in buildingParcels)
+            {
+
+
+                var percentage = 100.0 * (bP.Props.Area / totalBuildingArea);
+                accumulatedPercentage += percentage;
+
+                if (accumulatedPercentage >= commercialPercentage)
+                    break;
+
+                bP.Type = ParcelType.Commercial;
+
+            }
+
+            return accumulatedPercentage;
+        }
+
+        public static void SendAiResponseToUI(string question, string answer)
+        {
+            var response = new
+            {
+                eventType = "ai_response", // Rename 'event' to avoid C# keyword conflict
+                message = $"Your Question:\n{question}\n\n" +
+                 $"Ai Response:\n{answer}\n\n"
+            };
+
+            string jsonResponse = JsonSerializer.Serialize(response);
+
+            View.CoreWebView2.PostWebMessageAsString(jsonResponse);
+
+        }
+
         public static void Evaluate()
         {
             if (System.Parcel.RoadNetwork == null || System.Parcel == null)
@@ -146,8 +276,6 @@ namespace UrbanDesign.Parcellation
 
             System.Enabled = true;
             System.Evaluate();
-            //SendPieChartInfoOfSubParcelAreaDistribution();
-            SendPieCharInfoOfParcelTypeAreaDistribution();
         }
 
         public static void Reset()
@@ -171,6 +299,7 @@ namespace UrbanDesign.Parcellation
             System.SetParcelTypeBasedOnArea();
             System.CreateBuildingParcels();
         }
+
         public static void SetMajorRoadWidth(double roadWidth)
         {
             System.MajorRoadWidth = roadWidth;
@@ -199,6 +328,7 @@ namespace UrbanDesign.Parcellation
             System.BuildingPlotWidth = width;
 
             System.CreateBuildingParcels();
+
         }
 
         public static void SetBuildingPlotDepthRange(double minDepth, double maxDepth)
@@ -207,6 +337,8 @@ namespace UrbanDesign.Parcellation
             System.BuildingPlotDepth_Max = maxDepth;
 
             System.CreateBuildingParcels();
+
+
         }
 
         public static void SetBuildingPlotWidthRange(double minWidth, double maxWidth)
@@ -215,6 +347,7 @@ namespace UrbanDesign.Parcellation
             System.BuildingPlotWidth_Max = maxWidth;
 
             System.CreateBuildingParcels();
+
         }
 
         #endregion
@@ -243,6 +376,7 @@ namespace UrbanDesign.Parcellation
                 {
                     System.Attractor = point.Location; // extracts the point3d
                     System.CreateBuildingParcels();
+                    //SetCommercialTypeByPercentage(System.CommercialPercentage,System.CommercialDistributionBasedOnAttractor);
                 }
                 return;
             }
@@ -261,7 +395,7 @@ namespace UrbanDesign.Parcellation
                     System.Parcel.RoadNetwork = roadNetwork;
 
                     System.Evaluate();
-                    SendPieCharInfoOfParcelTypeAreaDistribution();
+                    //SendPieCharInfoOfParcelTypeAreaDistribution();
                 }
                 return;
             }
@@ -277,7 +411,7 @@ namespace UrbanDesign.Parcellation
                 roads.Add(new Road(cv));
                 System.Parcel.RoadNetwork = new RoadNetwork(roads);
                 System.Evaluate();
-                SendPieCharInfoOfParcelTypeAreaDistribution();
+               // SendPieCharInfoOfParcelTypeAreaDistribution();
 
                 return;
             }
@@ -290,7 +424,7 @@ namespace UrbanDesign.Parcellation
                 System.ApplyGreenZone();
 
                 System.CreateSubParcelsFromMinorRoads();
-                SendPieCharInfoOfParcelTypeAreaDistribution();
+               // SendPieCharInfoOfParcelTypeAreaDistribution();
 
             }
 
@@ -437,55 +571,58 @@ namespace UrbanDesign.Parcellation
 
         public static void SendPieCharInfoOfParcelTypeAreaDistribution()
         {
-            //parcel by manjor roads
+            // Parcels categorized by road levels
             var minorRoadParcels = System.GetParcelsOnLevel(3);
             var majorRoadParcels = System.GetParcelsOnLevel(2);
-
+            var buildingParcels = System.GetParcelsOnLevel(4);
 
             if (minorRoadParcels.Count == 0)
                 return;
 
+            // Green Parcels
             var greenParcels = majorRoadParcels.Where(p => p.Type == ParcelType.Green).ToList();
-
-            minorRoadParcels.ForEach(p => {
+            minorRoadParcels.ForEach(p =>
+            {
                 if (p.Type == ParcelType.Green)
                 {
                     greenParcels.Add(p);
                 }
-            
             });
 
-            var residentialParcels = minorRoadParcels.Where(p => p.Type == ParcelType.Residential);
+            // Residential Parcels
+            var residentialParcels = buildingParcels.Where(p => p.Type == ParcelType.Residential);
 
+            // Commercial Parcels
+            var commercialParcels = buildingParcels.Where(p => p.Type == ParcelType.Commercial);
+
+            // Area Calculations
             var greenTotalArea = greenParcels.Sum(p => p.Props.Area);
-
             var resTotalArea = residentialParcels.Sum(p => p.Props.Area);
-
-            var roadArea = System.Parcel.Props.Area - (greenTotalArea + resTotalArea);
+            var comTotalArea = commercialParcels.Sum(p => p.Props.Area);
 
             var totalArea = System.Parcel.Props.Area;
+            var roadArea = totalArea - (greenTotalArea + resTotalArea + comTotalArea);
 
-
-
+            // Pie Chart Labels
             var title = "Zone Area Distribution";
-            var labels = new List<string>()
-            {
-                $"Green Zone: {Math.Round(100.0*(greenTotalArea/totalArea),2)}%",
-                $"Residential Zone: {Math.Round(100.0*(resTotalArea/totalArea),2)}%",
-                $"Roads: {Math.Round(100.0*(roadArea/totalArea),2)}%"
-            };
+            var labels = new List<string>
+    {
+        $"Green Zone: {Math.Round(100.0 * (greenTotalArea / totalArea), 2)}%",
+        $"Residential Zone: {Math.Round(100.0 * (resTotalArea / totalArea), 2)}%",
+        $"Commercial Zone: {Math.Round(100.0 * (comTotalArea / totalArea), 2)}%",
+        $"Roads: {Math.Round(100.0 * (roadArea / totalArea), 2)}%"
+    };
 
-
+            // Data Set for Pie Chart
             var dataSet = new Dataset()
             {
                 Label = "area",
-                Data = new List<double>() { Math.Round(greenTotalArea,2),Math.Round(resTotalArea,2),Math.Round(roadArea,2)},
-                BackgroundColor = new List<string>() { "rgb(34, 139, 34)","rgb(255,215,0)", "rgb(156,156,156)" },
+                Data = new List<double> { Math.Round(greenTotalArea, 2), Math.Round(resTotalArea, 2), Math.Round(comTotalArea, 2), Math.Round(roadArea, 2) },
+                BackgroundColor = new List<string> { "rgb(34, 139, 34)", "rgb(255,215,0)", "rgb(255, 165, 0)", "rgb(156,156,156)" }, // Blue added for Commercial
                 HoverOffset = 4
-
             };
 
-
+            // Pie Chart Data
             var pieChartData = new PieChartProps()
             {
                 Labels = labels,
@@ -497,15 +634,16 @@ namespace UrbanDesign.Parcellation
 
             var jsonOptions = new JsonSerializerOptions
             {
-                PropertyNamingPolicy = JsonNamingPolicy.CamelCase, // Ensures JSON uses lowercase property names
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 WriteIndented = true
             };
 
             var pieString = JsonSerializer.Serialize(req, jsonOptions);
 
-
+            // Send Data to WebView
             View.CoreWebView2.PostWebMessageAsJson(pieString);
         }
+
 
         #endregion
     }

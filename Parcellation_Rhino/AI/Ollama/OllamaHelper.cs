@@ -8,85 +8,57 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using UrbanDesign.Parcellation;
 
 namespace UrbanDesign.AI
 {
     public static class OllamaHelper
     {
+        public static string CurrentQuery;
+        public static string Context;
 
-        //public static async Task<string> GetOllamaResponse(string userMessage, object context, Action<string, string> sendToWebViewUi)
-        //{
-        //    using (var httpClient = new HttpClient())
-        //    {
-        //        string apiUrl = "http://localhost:11434/api/chat";
+        public static OllamaApiClient Ollama = new OllamaApiClient(new Uri("http://localhost:11434"));
 
-        //        // Convert context object to JSON string
-        //        string contextJson = JsonSerializer.Serialize(context);
+        public static ChatRequestBuilder Request = new ChatRequestBuilder();
 
-        //        var chatRequest = new ChatRequest("urban", [new Message("user", $"{userMessage}")],false);
+        public static async Task GetOllamaResponseFromFunctionCalling(Action<string, string> sendToWebViewUi)
+        {
+            ChatRequest req = new ChatRequest();
+            req.Model = "urban";
 
+            var context = new { Query = CurrentQuery, QueryContext = Context };
+            var contextString = JsonSerializer.Serialize(context);
 
-        //        string jsonBody = JsonSerializer.Serialize(chatRequest);
+            req.Messages = new List<Message>() {
+            new Message{ Content=contextString,Role="user"}
+            };
 
-        //        //\n\nContext:\n{contextJson}
+            var response  = Ollama.ChatAsync(req);
 
-        //        var request = new HttpRequestMessage(HttpMethod.Post, apiUrl)
-        //        {
-        //            Content = new StringContent(jsonBody, Encoding.UTF8, "application/json")
-        //        };
+            var resBuilder = new StringBuilder();
+            await foreach (var responseStream in response)
+            {
+                if (responseStream?.Message.Content is not null)
+                {
+                    resBuilder.Append(responseStream?.Message.Content);
+                }
+            }
 
-        //        var response = await httpClient.SendAsync(request);
-        //        string responseBody = await response.Content.ReadAsStringAsync();
-
-        //        try
-        //        {
-        //            var responseJson = JsonSerializer.Deserialize<JsonElement>(responseBody);
-
-        //            if (responseJson.TryGetProperty("message", out JsonElement responseElement))
-        //            {
-        //                if (responseElement.TryGetProperty("content", out JsonElement answerElm))
-        //                {
-        //                    var chat = JsonSerializer.Deserialize<ChatMessage>(responseElement);
-        //                    string answer = answerElm.ToString();
-        //                    sendToWebViewUi(userMessage, answer);
-        //                    return answer;
-        //                }
-        //                else
-        //                {
-        //                    sendToWebViewUi(userMessage, "Error: Response key not found.");
-        //                    return "Error: Response key not found.";
-        //                }
-
-                        
-
-        //            }
-        //            else
-        //            {
-        //                sendToWebViewUi(userMessage, "Error: Response key not found.");
-        //                return "Error: Response key not found.";
-        //            }
-        //        }
-        //        catch (JsonException)
-        //        {
-        //            sendToWebViewUi(userMessage, "Error: Invalid JSON response from Ollama.");
-        //            return "Error: Invalid JSON response from Ollama.";
-        //        }
-        //    }
-        //}
+            sendToWebViewUi(CurrentQuery, resBuilder.ToString());
+        }
 
 
         public static async Task OllamaFunctionCall(Functions functions,
-            ChatRequestBuilder request,
-            OllamaApiClient client,
             string query,
             Action<string, string> sendToWebViewUi)
         {
+            CurrentQuery = query;
 
-            request.ClearMessages();
+            Request.ClearMessages();
 
-            var req = request.AddMessage(query, "user").Build();
+            var req = Request.AddMessage(query, "user").Build();
 
-            var chat = client.ChatAsync(req);
+            var chat = Ollama.ChatAsync(req);
 
             var functionDetails = new List<FunctionDetails>();
 
@@ -119,9 +91,13 @@ namespace UrbanDesign.AI
                 }
             }
 
-            functionDetails.ForEach(fDetail => functions.Execute(fDetail));
+            functionDetails.ForEach(fDetail => {var content =  functions.Execute(fDetail);
 
-            sendToWebViewUi(query, "done");
+                if(content!=string.Empty)
+                    sendToWebViewUi(query, content);
+            });
+
+
         }
     }
 }
