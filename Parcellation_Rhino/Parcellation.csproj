@@ -18,9 +18,9 @@
   <PropertyGroup>
     <!-- Specifies information for Assembly and Yak -->
     <Version>1.0</Version>
-    <Title>Parcellation</Title>
-    <Company>Parcellation Authors</Company>
-    <Description>Description of Parcellation</Description>
+    <Title>Urban Design</Title>
+    <Company>Omkar Bhagwat</Company>
+    <Description>Tools dealing with Urban Desing and Planning</Description>
   </PropertyGroup>
   
   <ItemGroup>
@@ -35,8 +35,16 @@
     <Folder Include="Helper\Listners\" />
   </ItemGroup>
 
+	<!--<ItemGroup>
+		<Reference Include="KangarooSolver">
+			<HintPath>$(ProgramFiles)\Rhino 8\Plug-ins\Grasshopper\Components\KangarooSolver.dll</HintPath>
+			<Private>false</Private>
+		</Reference>
+	</ItemGroup>-->
+
 	<ItemGroup>
 		<ProjectReference Include="..\LMFunctionSourceGenerator\LMFunctionSourceGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+		<ProjectReference Include="..\Parcellation.Core\UrbanDesign.Core.csproj" />
 	</ItemGroup>
   
   <!-- For Windows only builds -->

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LMFunctionSourceGenerator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be2a02f2fe70ac423c64461612aeb8ecc17d2e5b")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c6d20766ba097c0b6d7eeca96aef73f76e8b6c97")]
 [assembly: System.Reflection.AssemblyProductAttribute("LMFunctionSourceGenerator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LMFunctionSourceGenerator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

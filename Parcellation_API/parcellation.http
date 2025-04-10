@@ -1,0 +1,35 @@
+﻿###
+POST http://localhost:5187/parcellation
+Content-Type: application/json
+{
+"boundary":"Hello Test boundary",
+"roadNetwork":"Hello test roadNetwork"
+  "majorRoadWidth":25,
+  "minorRoadWidth":12,
+  "caller":"RhinoCommon"
+}
+
+###
+GET http://localhost:5187/test
+
+
+###
+POST http://localhost:5187/compute/parcellation
+Content-Type: application/json
+{
+  "boundaryPoints": [
+    { "X": 0, "Y": 0, "Z": 0 },
+    { "X": 100, "Y": 0, "Z": 0 },
+    { "X": 100, "Y": 100, "Z": 0 },
+    { "X": 0, "Y": 100, "Z": 0 },
+    { "X": 0, "Y": 0, "Z": 0 } 
+  ],
+  "roadNetwork": [
+    [
+      { "X": 10, "Y": -10, "Z": 0 },
+      { "X": 10, "Y": 110, "Z": 0 }
+    ]
+  ]
+}
+
+

@@ -1,8 +1,13 @@
 import { RiSendPlane2Fill } from "react-icons/ri";
-import { sendToWebView } from "../../../app/webview/webview";
-import { useEffect, useRef, useState } from "react";
+import { sendToWebView } from "../../../webview/webview";
+import { FC, useEffect, useRef, useState } from "react";
 
-const QueryToAi = ({ loading, handleLoadingState }) => {
+interface QueryAiProps {
+  loading: boolean;
+  handleLoadingState: (state: boolean) => void;
+}
+
+const QueryToAi: FC<QueryAiProps> = ({ loading, handleLoadingState }) => {
   const [message, setMessage] = useState(""); // State to store typed message
   const inputRef = useRef<HTMLDivElement>(null); // Ref for contentEditable div
 

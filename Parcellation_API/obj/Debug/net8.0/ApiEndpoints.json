@@ -1,0 +1,100 @@
+[
+  {
+    "ContainingType": "Program\u002B\u003C\u003Ec",
+    "Method": "\u003C\u003CMain\u003E$\u003Eb__0_0",
+    "RelativePath": "",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Parcellation_API.Features.RhinoCompute.Parcellation.CreateParcellation.ComputeParcellationEndpoint\u002B\u003C\u003Ec",
+    "Method": "\u003CMapComputeParcellation\u003Eb__0_0",
+    "RelativePath": "compute/parcellation/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Parcellation_API.Features.RhinoCompute.Parcellation.CreateParcellation.CreateParcellationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Parcellation_API.Features.Parcellation.CreateParcellationEndPoint\u002B\u003C\u003Ec",
+    "Method": "\u003CMapCreateParcellation\u003Eb__0_0",
+    "RelativePath": "parcellation/",
+    "HttpMethod": "POST",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "dto",
+        "Type": "Parcellation_API.Features.Parcellation.CreateParcellationDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Microsoft.AspNetCore.Http.HttpValidationProblemDetails",
+        "MediaTypes": [
+          "application/problem\u002Bjson"
+        ],
+        "StatusCode": 400
+      }
+    ]
+  },
+  {
+    "ContainingType": "Parcellation_API.Features.Parcellation.DeleteParcellationEndpoint\u002B\u003C\u003Ec",
+    "Method": "\u003CMapDeleteParcellation\u003Eb__0_0",
+    "RelativePath": "parcellation/all",
+    "HttpMethod": "DELETE",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Parcellation_API.Features.Parcellation.GetParcellation.GetParcellationEndpoint\u002B\u003C\u003Ec",
+    "Method": "\u003CMapGetParcellationInputs\u003Eb__0_0",
+    "RelativePath": "parcellation/inputs/all",
+    "HttpMethod": "GET",
+    "IsController": false,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  }
+]

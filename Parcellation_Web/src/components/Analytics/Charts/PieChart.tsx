@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, Title } from "chart.js";
-import { PieChartProps, ReceiveMessageProps } from "@/app/webview/webview";
+import { PieChartProps, ReceiveMessageProps } from "@/webview/webview";
 
 // Register required components
 ChartJS.register(ArcElement, Tooltip, Legend, Title);

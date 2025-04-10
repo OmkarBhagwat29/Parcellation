@@ -358,7 +358,7 @@ namespace UrbanDesign.Parcellation
                 }
                 else if (parcel.Children[i].Type == ParcelType.Commercial)
                 {
-                    e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.Orange));
+                    e.Display.DrawBrepShaded(parcel.Children[i].Geometry, new DisplayMaterial(Color.LightBlue));
                     e.Display.DrawCurve(parcel.Children[i].ParcelCurve, Color.Black, 2);
                 }
             }

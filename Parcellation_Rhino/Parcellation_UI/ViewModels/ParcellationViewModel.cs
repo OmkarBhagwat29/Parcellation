@@ -1,12 +1,9 @@
 ﻿
 
 using Microsoft.Web.WebView2.Wpf;
-using Parcellation.AI;
 using Rhino;
-
 using UrbanDesign.AI;
-
-
+using UrbanDesign.Core.Services;
 using UrbanDesign.Models;
 using UrbanDesign.Parcellation;
 using UrbanDesign.Ui.Helpers;
@@ -22,7 +19,7 @@ namespace UrbanDesign.Ui.ViewModels
         Functions _functions = new Functions();
 
 
-
+        ParcellationService _service = new ParcellationService();
         public ParcellationViewModel(WebView2 webView)
         {
             this.WebView = webView;
@@ -57,16 +54,13 @@ namespace UrbanDesign.Ui.ViewModels
             {
                 var data = e.WebMessageAsJson.ToString();
 
-                var obj = JsonSerializer.Deserialize<ParcellationEventModel>(data, new JsonSerializerOptions
+                var obj = JsonSerializer.Deserialize<WebViewEventModel>(data, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true,
                     Converters = { new JsonStringEnumConverter(JsonNamingPolicy.CamelCase, allowIntegerValues: true),
                     new JsonNumberConverter() // Custom converter for handling numbers }  // This enables enum string conversion
                     }
                 });
-
-
-
 
                 switch (obj.Command)
                 {
@@ -177,19 +171,14 @@ namespace UrbanDesign.Ui.ViewModels
 
                         //var info = ParcellationHelper.GetSystemJson();
                         var query = $"{aiMessage.message}";
-
-                        //OllamaHelper.GetOllamaResponse(query, "", this.SendAiResponseToUI);
-
-                       
-
                         OllamaHelper.OllamaFunctionCall(_functions, query, ParcellationHelper.SendAiResponseToUI);
-
-
 
                         break;
                     default:
                         break;
                 }
+
+                ParcellationHelper.PostToDbAsync(_service);     
 
                 doc.Views.Redraw();
             }

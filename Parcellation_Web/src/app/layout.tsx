@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Hello World App",
-  description: "A simple Hello World application with Tailwind CSS",
+  title: "Parcellation App",
+  description: "Parcellation App that rund shape diver api in the background",
 };
 
 export default function RootLayout({

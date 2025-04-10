@@ -1,0 +1,12 @@
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\bin\Debug\net8.0\UrbanDesign.Core.deps.json
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\bin\Debug\net8.0\UrbanDesign.Core.dll
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\bin\Debug\net8.0\UrbanDesign.Core.pdb
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.AssemblyInfoInputs.cache
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.AssemblyInfo.cs
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.csproj.CoreCompileInputs.cache
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.sourcelink.json
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.dll
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\refint\UrbanDesign.Core.dll
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\UrbanDesign.Core.pdb
+C:\Users\Om\source\repos\Parcellation\Parcellation.Core\obj\Debug\net8.0\ref\UrbanDesign.Core.dll

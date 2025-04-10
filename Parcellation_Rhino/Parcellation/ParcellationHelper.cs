@@ -10,6 +10,8 @@ using Rhino.UI;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using UrbanDesign.AI;
+using UrbanDesign.Core.Dtos;
+using UrbanDesign.Core.Services;
 using UrbanDesign.Helper.Inputs;
 using UrbanDesign.Models;
 
@@ -618,7 +620,7 @@ namespace UrbanDesign.Parcellation
             {
                 Label = "area",
                 Data = new List<double> { Math.Round(greenTotalArea, 2), Math.Round(resTotalArea, 2), Math.Round(comTotalArea, 2), Math.Round(roadArea, 2) },
-                BackgroundColor = new List<string> { "rgb(34, 139, 34)", "rgb(255,215,0)", "rgb(255, 165, 0)", "rgb(156,156,156)" }, // Blue added for Commercial
+                BackgroundColor = new List<string> { "rgb(34, 139, 34)", "rgb(255,215,0)", "rgb(173, 216, 230)", "rgb(156,156,156)" }, // Blue added for Commercial
                 HoverOffset = 4
             };
 
@@ -645,6 +647,26 @@ namespace UrbanDesign.Parcellation
         }
 
 
+        #endregion
+
+        #region
+        public static async Task PostToDbAsync(ParcellationService service)
+        {
+            if (System != null &&
+                    System.Parcel != null &&
+                    System.Parcel.RoadNetwork != null)
+            {
+                var parcelString = JsonSerializer.Serialize(System.Parcel.ParcelCurve);
+                var roadNetwork = JsonSerializer.Serialize(System.Parcel.RoadNetwork.Roads.Select(rn => rn.Curve).ToList());
+
+                   await  service
+                    .CreateParcellationAsync(
+                    new CreateParcellationDto(parcelString,
+                    roadNetwork,
+                    System.MajorRoadWidth,
+                    System.MinorRoadWidth, Caller.RhinoCommon));
+            }
+        }
         #endregion
     }
 

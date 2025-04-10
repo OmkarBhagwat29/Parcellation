@@ -1,5 +1,5 @@
 ﻿using OllamaSharp.Models;
-using Parcellation.AI;
+using Parcellation.AI.Ollama;
 using System;
 using System.Collections;
 using System.Collections.Generic;

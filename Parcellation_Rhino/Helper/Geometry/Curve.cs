@@ -16,7 +16,7 @@ namespace UrbanDesign.Helper.Geometry
             allCurves.AddRange(otherCurves);
 
             // Boolean split the regions
-            var splitRegions = Curve.CreateBooleanRegions(allCurves, Plane.WorldXY, false, tol);
+            CurveBooleanRegions splitRegions = Curve.CreateBooleanRegions(allCurves, Plane.WorldXY, false, tol);
 
             var closedParcels = new List<Curve>();
             if (splitRegions != null)
@@ -24,6 +24,7 @@ namespace UrbanDesign.Helper.Geometry
 
                 for (int i = 0; i < splitRegions.RegionCount; i++)
                 {
+                    
                     var regions = splitRegions.RegionCurves(i).ToList();
 
                     regions.ForEach(r =>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Parcellation_API.props" />
+</Project>
