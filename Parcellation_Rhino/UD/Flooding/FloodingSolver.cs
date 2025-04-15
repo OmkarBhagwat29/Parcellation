@@ -10,12 +10,13 @@ namespace UD.Flooding
         public List<Simulation.Particle> Particles = new();
         public List<IConstraint> Constraints = new();
         public Mesh Terrain;
+
+        public static double TimeStep = 1;
         //public double TimeStep = 0.05;
         //public int Iterations = 5;
 
-        public bool Run(Func<bool> isPaused)
+        public void Run(double deltaTime)
         {
-            if (isPaused()) return true;
 
             foreach (var c in Constraints)
             {
@@ -24,7 +25,7 @@ namespace UD.Flooding
 
             foreach (var particle in Particles)
             {
-                particle.Update();
+                particle.Update(deltaTime * TimeStep);
 
 
                 var result = Terrain.ClosestPoint(particle.Position, out Point3d closestPt, out Vector3d normal, 0.0);
@@ -32,17 +33,22 @@ namespace UD.Flooding
                 {
                     normal.Unitize();
                     // Corrected position: particle sits on the surface + lifted by its radius
-                    Point3d targetPos = closestPt + (normal * particle.Radius);
+                    Point3d targetPos = closestPt + (normal * Simulation.Particle.Radius);
 
                     particle.Position = targetPos;
+
+
+                    if (particle.Path.Count < 5000)
+                    {
+                        particle.Path.Add(particle.Position);
+
+
+                    }
+
 
                 }
             }
 
-
-
-
-            return false;
         }
 
     }

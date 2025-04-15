@@ -8,16 +8,15 @@ namespace UD.Simulation
         public Point3d PreviousPosition;
         public Vector3d Velocity = Vector3d.Zero;
         public Vector3d Acceleration = Vector3d.Zero;
-        public double Mass = 1.0;
+        public static double Mass = 1.0;
         public bool IsFixed = false;
-        public double Radius = 0.5;
-
-        public const double MovementEpsilon = 0.0000001;
-        public const int PositionLength = 50;
-        public const double Friction = 0.01;
+        public static double Radius = 2;
+        public static int PositionLength = 50;
+        public static double Friction = 0.01;
 
         // History to store past positions
-        public List<Point3d> PositionHistory { get; set; } = new List<Point3d>();
+        //public List<Point3d> PositionHistory { get; set; } = new List<Point3d>();
+        public Polyline Path = new Polyline();
 
         public Particle(Point3d start)
         {
@@ -26,31 +25,28 @@ namespace UD.Simulation
             Mass = 1.0;
         }
 
-        public void Update()
+
+        public void Update(double deltaTime)
         {
-            // Velocity = (Position - PreviousPosition) / dt;
-            this.PreviousPosition = this.Position;
-            this.Velocity += this.Acceleration;
+            if (IsFixed) return;
 
+            // Apply damping to velocity
+            this.Velocity *= (1 - Friction);
 
-            this.Position += this.Velocity;
+            // Update velocity with acceleration (considering deltaTime)
+            this.Velocity += this.Acceleration * deltaTime;
 
-            if (PositionHistory.Count > PositionLength)
-            {
-                PositionHistory.RemoveAt(0);
-            }
-            else
-            {
-                PositionHistory.Add(this.Position);
-            }
+            // Update position
+            this.Position += this.Velocity * deltaTime;
 
-           this.Acceleration = Vector3d.Zero;
-            this.Velocity = Vector3d.Zero;
+            // Reset acceleration only
+            this.Acceleration = Vector3d.Zero;
         }
+
 
         public void ApplyForce(Vector3d force)
         {
-            force /= this.Mass;
+           force /= Mass;
             Acceleration += force;
         }
     }

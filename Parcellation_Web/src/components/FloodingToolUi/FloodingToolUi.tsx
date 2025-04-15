@@ -1,66 +1,92 @@
-import React from "react";
-import Checkbox from "../Inputs/Checkbox";
-import Button from "../Inputs/Button";
-import Slider from "../Inputs/Slider";
+import React, { useEffect, useState } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { themes } from "@/theme";
-import SlideableToggle from "../Inputs/SlideableToggle";
+import ForceParameters from "./ForceParams";
+import SelectionParams from "./SelectionParams";
+import PlayResetParams from "./PlayResetParams";
+import { isWebViewMode } from "@/webview/webview";
+import ParticleParams from "./ParticleParams";
+import VisibilityParams from "./VisibilityParams";
 
 const FloodingToolUi = () => {
-  const { theme } = useTheme();
+  const { theme, setTheme } = useTheme();
 
   const currentTheme = themes[theme];
 
-  console.log(currentTheme);
+  const [contextMenu, setContextMenu] = useState<{
+    x: number;
+    y: number;
+    visible: boolean;
+  }>({ x: 0, y: 0, visible: false });
+
+  const [webViewAvailable, setWebViewAvailable] = useState(false);
+
+  useEffect(() => {
+    setWebViewAvailable(isWebViewMode());
+  }, []);
+
+  // Send to webview after right-click context menu is shown
+  const handleRightClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setContextMenu({ x: e.clientX, y: e.clientY, visible: true });
+  };
+
+  // Send to webview when a theme is selected
+  const handleThemeSelect = (selectedTheme: keyof typeof themes) => {
+    setTheme(selectedTheme);
+    setContextMenu({ ...contextMenu, visible: false });
+  };
+
+  // Close context menu and send info to webview after closing
+  const handleClickAnywhere = () => {
+    if (contextMenu.visible) {
+      setContextMenu({ ...contextMenu, visible: false });
+    }
+  };
+
   return (
     <>
       <div
-        className={`m-2 p-2 w-50 flex flex-col items-center justify-center select-none ${currentTheme.background} gap-4`}
+        id="main"
+        onContextMenu={handleRightClick}
+        onClick={handleClickAnywhere}
+        className={`p-2 w-64 flex flex-col select-none ${currentTheme.background} gap-4 max-h-[750px] overflow-auto`}
       >
-        <Button
-          webViewProps={{ id: "flooding", command: "SELECT_TERRAIN" }}
-          name="Select Terrain"
-          width="w-auto"
-          maxWidth="150px"
-        />
-
-        <Button
-          webViewProps={{ id: "flooding", command: "SELECT_OBSTACLES" }}
-          name="Select Obstacles"
-          width="w-auto"
-          maxWidth="150px"
-        />
-
-        <div className="flex flex-row items-center justify-center gap-2">
-          <label>Run:</label>
-          <div className="w-16 px-1">
-            <SlideableToggle
-              currentValue={true}
-              webViewProps={{ id: "flooding", command: "RUN_SIMULATION" }}
-            />
-          </div>
-        </div>
-
-        <Button
-          webViewProps={{ id: "flooding", command: "RESET_SIMULATION" }}
-          name="Reset"
-          width="w-20"
-        />
-
-        <div className="w-full flex mt-10">
-          <label>Gravity:</label>
-          <div className="pl-4 w-full">
-            <Slider
-              webViewProps={{ id: "flooding", command: "SET_GRAVITY" }}
-              value={1}
-              start={0.0}
-              step={0.0001}
-              end={1}
-              units="m/s2"
-            />
-          </div>
-        </div>
+        <SelectionParams />
+        <PlayResetParams />
+        <ForceParameters />
+        <ParticleParams />
+        <VisibilityParams />
       </div>
+
+      {contextMenu.visible && (
+        <div
+          id="theme-menu"
+          style={{
+            position: "fixed",
+            top: webViewAvailable ? 0 : contextMenu.y, // Top-left when webview is available, else follow mouse
+            left: webViewAvailable ? 0 : contextMenu.x, // Same as above
+            backgroundColor: "#fff",
+            border: "1px solid #ccc",
+            borderRadius: "0.25rem",
+            padding: "0.5rem",
+            zIndex: 1000,
+          }}
+          onClick={(e) => e.stopPropagation()}
+        >
+          {Object.keys(themes).map((themeName) => (
+            <div
+              key={themeName}
+              onClick={() =>
+                handleThemeSelect(themeName as keyof typeof themes)
+              }
+              className="cursor-pointer px-2 py-1 hover:bg-gray-200"
+            >
+              {themeName}
+            </div>
+          ))}
+        </div>
+      )}
     </>
   );
 };

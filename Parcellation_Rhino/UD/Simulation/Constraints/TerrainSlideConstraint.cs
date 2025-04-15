@@ -21,7 +21,7 @@ namespace UD.Simulation.Constraints
             {
                 normal.Unitize();
                // Corrected position: particle sits on the surface + lifted by its radius
-               Point3d targetPos = closestPt + (normal * _particle.Radius);
+               Point3d targetPos = closestPt + (normal * Particle.Radius);
 
                 _particle.Position = targetPos;
        

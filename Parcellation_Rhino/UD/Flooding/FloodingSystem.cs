@@ -3,9 +3,10 @@ using Parcellation.UD.Flooding;
 using Rhino;
 using Rhino.Display;
 using Rhino.Geometry;
-
+using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
+using UD.Simulation;
 
 
 namespace UD.Flooding
@@ -15,6 +16,9 @@ namespace UD.Flooding
         private CancellationTokenSource _cancellationSource;
         private CancellationToken _cancellationToken;
         private Task _simulationTask;
+
+        public static bool ShowPoints = true;
+        public static bool ShowPaths = true;
 
         public double Gravity = -9.8;
         public double TimeStep = 0.1;
@@ -67,7 +71,11 @@ namespace UD.Flooding
 
                 try
                 {
+                    Reset = true;
                     _simulationTask?.Wait();
+
+                    Reset = false;
+
                    // _cancellationSource?.Dispose();
 
                 }
@@ -88,29 +96,28 @@ namespace UD.Flooding
             _cancellationSource = new CancellationTokenSource();
             _cancellationToken = _cancellationSource.Token;
 
+
+
             _simulationTask = Task.Run(() =>
             {
- 
+                Stopwatch timer = Stopwatch.StartNew();
+                double previousTime = 0;
+
+
+
                 while (!_cancellationToken.IsCancellationRequested)
                 {
-
                     if (!Run)
                         continue;
 
+                    double currentTime = timer.Elapsed.TotalSeconds;
+                    double deltaTime = currentTime - previousTime;
+                    previousTime = currentTime;
+                    deltaTime = Math.Min(deltaTime, 0.1);
 
-                    var exit =  _solver.Run(() => false);
 
-                    if (exit)
-                        break;
+                    _solver.Run(deltaTime);
 
-
-                    // Schedule a redraw on the UI thread
-                   RhinoApp.InvokeOnUiThread((Action)(() =>
-                    {
-                        FloodingHelper.Doc.Views.Redraw();
-                    }));
-
-                    System.Threading.Thread.Sleep(16); // ~60 FPS
                 }
 
             },_cancellationToken);
@@ -118,16 +125,25 @@ namespace UD.Flooding
 
         protected override void PostDrawObjects(DrawEventArgs e)
         {
-            if (_solver.Particles == null || _solver.Particles.Count == 0)
+            if (_solver.Particles == null || _solver.Particles.Count == 0 || (!ShowPaths && !ShowPoints))
                 return;
 
             var display = e.Display;
 
             var mat = new DisplayMaterial(Color.Blue, 0.5);
+
             foreach (var particle in _solver.Particles)
             {
 
-                display.DrawSphere(new Sphere(particle.Position,particle.Radius),Color.Blue,3);
+                if(ShowPoints)
+                    display.DrawSphere(new Sphere(particle.Position,Simulation.Particle.Radius),Color.Blue,1);
+
+                if (ShowPaths)
+                {
+
+                    display.DrawPolyline(particle.Path, Color.Red);
+                }
+
 
             }
         }

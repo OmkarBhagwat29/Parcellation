@@ -1,5 +1,4 @@
 ﻿using Eto.Forms;
-using Parcellation.UD.UI.Flooding;
 
 
 namespace UD.UI.Flooding
@@ -10,11 +9,11 @@ namespace UD.UI.Flooding
         public FloodingUi(Uri uri) : base(uri)
         {
             Title = "Flooding Resilience";
-            Resizable = true;
+            Resizable = false;
             WindowStyle = WindowStyle.Default;
-            Size = new Eto.Drawing.Size(350, 230);
-
-            this._vm = new FloodingViewModel(this._webView);
+            // Size = new Eto.Drawing.Size(350, 230);
+            this.Maximizable = false;
+            this._vm = new FloodingViewModel(this._webView,this);
         }
     }
 }

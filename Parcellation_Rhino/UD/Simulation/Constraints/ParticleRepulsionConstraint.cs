@@ -6,12 +6,12 @@ namespace UD.Simulation.Constraints
     public class ParticleRepulsionConstraint : IConstraint
     {
         private readonly List<Particle> _particles;
-        private readonly double _minDistance;
+       // private readonly double _minDistance;
 
-        public ParticleRepulsionConstraint(List<Particle> particles, double minDistance = 1.0)
+        public ParticleRepulsionConstraint(List<Particle> particles)
         {
             _particles = particles;
-            _minDistance = minDistance;
+            //_minDistance = minDistance;
         }
 
         public void Solve()
@@ -27,25 +27,22 @@ namespace UD.Simulation.Constraints
                     var dir = pi.Position - pj.Position;
                     double dist = dir.Length;
 
-                    if (dist < _minDistance && dist > 0.0001)
+                    if (dist < Particle.Radius*2 && dist > 0.0001)
                     {
                         dir.Unitize();
-                        Vector3d push = dir * (_minDistance - dist);
 
+                        // Repulsion force is proportional to the overlap distance
+                        double overlap = Particle.Radius * 2 - dist;
+                        Vector3d push = dir * (overlap * 0.5); // Repelling force
+
+                        // Apply repulsion to both particles unless they're fixed
                         if (!pi.IsFixed)
                             pi.Position += push;
 
                         if (!pj.IsFixed)
                             pj.Position -= push;
 
-                        //var frictionMag = 0.001;
-                        //var friction = pj.Velocity;
-                        //friction *= -1;
-                        //friction.Unitize();
-                        //friction *= frictionMag;
-                        //pj.Position += friction;
 
-                
                     }
                 }
             }

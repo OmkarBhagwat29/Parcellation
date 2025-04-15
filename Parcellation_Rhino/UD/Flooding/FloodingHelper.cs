@@ -15,16 +15,21 @@ namespace Parcellation.UD.Flooding
 
         public static RhinoDoc Doc = RhinoDoc.ActiveDoc;
 
+
+
+
         public static void InitializeSystem()
         {
             System = new FloodingSystem();
         }
 
+
+
         #region input
         public static void SetFloodingTerrain()
         {
 
-            var srf = RhinoSelect.SelectObject("Select Terrain", Rhino.DocObjects.ObjectType.Surface);
+            var srf = RhinoSelect.SelectObject("Select Terrain", Rhino.DocObjects.ObjectType.Brep);
 
             if (srf == null)
                 return;
@@ -41,6 +46,10 @@ namespace Parcellation.UD.Flooding
 
         public static void Evaluate()
         {
+            //Doc.Objects.AddMesh(System.TerrainMesh);
+            if (System.Terrain is null)
+                return;
+
             System.Enabled = true;
             var points = System.Terrain.Faces[0].IsoTrimSurface(20, 25)
                     .Select(s => AreaMassProperties.Compute(s))
@@ -61,63 +70,28 @@ namespace Parcellation.UD.Flooding
             System._solver.Particles.ForEach(p => System._solver.Constraints.Add(new GravityConstraint(p)));
             // System._solver.Particles.ForEach(p => System._solver.Constraints.Add(new TerrainSlideConstraint(p, System.TerrainMesh)));
 
-            System._solver.Constraints.Add(new ParticleRepulsionConstraint(System._solver.Particles, System._solver.Particles[0].Radius * 2));
+            System._solver.Constraints.Add(new ParticleRepulsionConstraint(System._solver.Particles));
 
             System.SolveAsync();
         }
 
         public static void Reset()
         {
-            Brep terrain = null;
-            if (System != null)
+
+            if (System != null & System.Terrain != null)
             {
-                terrain = System.Terrain.DuplicateBrep();
                 System.Stop();
                 System.Enabled = false;
-                System = null; // Fully clear the previous instance
-            }
 
-            if (terrain is not null)
-            {
-                //return;
-                System = new FloodingSystem(); // Start fresh
-                System.SetTerrain(terrain);
-                System.SolveAsync();
+                var run = System.Run;
+                System = null;
+
+                System = new FloodingSystem();
+
                 Doc.Views.Redraw();
             }
 
-
         }
         #endregion
-
-
-        private static void PrepareMockup(Surface srf)
-        {
-
-            var brp = srf.ToBrep();
-            System.SetTerrain(brp);
-
-            var mesh = System.TerrainMesh;
-
-            var points = srf.IsoTrimSurface(20, 25)
-                    .Select(s => AreaMassProperties.Compute(s))
-                     .Where(a => a is not null)
-                     .Select(a=>a.Centroid)
-                    .ToList();
-
-            foreach (var point in points)
-            {
-                var particle = new Particle(point);
-
-                System._solver.Particles.Add(particle);
-            }
-
-            System._solver.Particles.ForEach(p => System._solver.Constraints.Add(new GravityConstraint(p)));
-          // System._solver.Particles.ForEach(p => System._solver.Constraints.Add(new TerrainSlideConstraint(p, System.TerrainMesh)));
-
-            System._solver.Constraints.Add(new ParticleRepulsionConstraint(System._solver.Particles, System._solver.Particles[0].Radius*2));
-
-            System.SolveAsync();
-        }
     }
 }

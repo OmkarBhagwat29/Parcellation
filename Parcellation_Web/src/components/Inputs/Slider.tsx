@@ -1,9 +1,14 @@
-import { useTheme } from "@/context/ThemeContext";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
 import { getDecimalCount, roundUp } from "@/math/math";
-import { themes } from "@/theme";
 import { sendToWebView, WebViewInputProps } from "@/webview/webview";
 import { debounce } from "lodash";
-import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+
+interface SliderTheme {
+  track: string;
+  fill: string;
+  thumb: string;
+  valueLabel: string;
+}
 
 interface SliderProps {
   webViewProps?: WebViewInputProps;
@@ -12,6 +17,9 @@ interface SliderProps {
   step: number;
   end: number;
   units?: string;
+  classname?: string;
+  theme: SliderTheme;
+  onChange?: (value: number) => void;
 }
 
 const Slider: FC<SliderProps> = ({
@@ -21,24 +29,26 @@ const Slider: FC<SliderProps> = ({
   step,
   end,
   units,
+  theme,
+  onChange,
+  classname = "",
 }) => {
-  const { theme } = useTheme();
-  const currentTheme = themes[theme];
-
   const [currentValue, setCurrentValue] = useState(value);
   const [editing, setEditing] = useState(false);
   const [inputValue, setInputValue] = useState(value.toString());
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const [decimalCount, setDecimalCount] = useState(getDecimalCount(step));
+  const decimalCount = getDecimalCount(step);
 
   const debouncedValueChange = useCallback(
-    debounce((value) => {
-      sendToWebView({
-        id: webViewProps?.id,
-        command: webViewProps?.command,
-        payload: { value },
-      });
+    debounce((value: number) => {
+      if (webViewProps) {
+        sendToWebView({
+          id: webViewProps.id,
+          command: webViewProps.command,
+          payload: { value },
+        });
+      }
     }, 100),
     [webViewProps]
   );
@@ -46,6 +56,7 @@ const Slider: FC<SliderProps> = ({
   const updateValue = (val: number) => {
     const clamped = Math.min(end, Math.max(start, val));
     setCurrentValue(clamped);
+    onChange?.(clamped);
     debouncedValueChange(clamped);
   };
 
@@ -56,7 +67,6 @@ const Slider: FC<SliderProps> = ({
     const totalSteps = Math.round((end - start) / step);
     const relativeX = Math.max(0, Math.min(clientX - rect.left, rect.width));
     const stepIndex = Math.round((relativeX / rect.width) * totalSteps);
-
     const steppedValue = roundUp(start + stepIndex * step, decimalCount);
     updateValue(steppedValue);
   };
@@ -92,24 +102,31 @@ const Slider: FC<SliderProps> = ({
     <>
       <div
         ref={trackRef}
-        className={`relative h-1 ${currentTheme.sliderTrack} rounded-full cursor-pointer`}
+        className={`relative h-1 ${theme.track} rounded-full cursor-pointer ${classname}`}
         onMouseDown={startDrag}
         onTouchStart={startDrag}
       >
-        {/* Fill */}
         <div
-          className={`absolute h-1 ${currentTheme.sliderFill} rounded-full`}
+          className={`absolute h-1 ${theme.fill} rounded-full`}
           style={{ width: `${percent}%` }}
         />
-        {/* Thumb */}
         <div
-          className={`absolute top-1/2 w-3 h-3 ${currentTheme.sliderThumb} rounded-full transform -translate-y-1/2 -translate-x-1/2`}
+          className={`absolute top-1/2 w-3 h-3 ${theme.thumb} rounded-full transform -translate-y-1/2 -translate-x-1/2`}
           style={{ left: `${percent}%` }}
         />
-        {/* Value display */}
         <div
-          className={`absolute text-xs ${currentTheme.sliderValue} px-1 py-0.5 rounded transform -translate-x-1/2`}
-          style={{ left: `${percent}%`, top: "-28px", minWidth: "max-content" }}
+          className={`absolute text-xs ${theme.valueLabel} px-1 py-0.5 rounded`}
+          style={{
+            left: `${percent}%`,
+            top: "-28px",
+            minWidth: "max-content",
+            transform:
+              percent < 10
+                ? "translateX(0%)"
+                : percent > 90
+                ? "translateX(-100%)"
+                : "translateX(-50%)",
+          }}
           onClick={() => {
             setInputValue(currentValue.toString());
             setEditing(true);
@@ -136,9 +153,7 @@ const Slider: FC<SliderProps> = ({
                 }
               }}
               className="bg-gray-700 text-white text-xs w-12 outline-none text-center"
-              style={{
-                appearance: "textfield",
-              }}
+              style={{ appearance: "textfield" }}
             />
           ) : (
             `${currentValue} ${units ?? ""}`

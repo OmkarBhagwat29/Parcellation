@@ -7,7 +7,7 @@ namespace UD.Simulation.Constraints
     {
         private Particle _particle;
         //private Vector3d _gravity;
-        public static Vector3d Gravity = new Vector3d(0,0,-0.98);
+        public static Vector3d Gravity = new Vector3d(0,0,-0.098);
 
         public GravityConstraint(Particle particle)
         {
