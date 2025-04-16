@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "mpsaz8Dk+uY3DM1M+7UrNip/IPuQbvc8MRmRMO0sXjM=",
+  "Source": "UrbanDesign_API",
+  "BasePath": "_content/UrbanDesign_API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "UrbanDesign_API\\wwwroot",
+      "Source": "UrbanDesign_API",
+      "ContentRoot": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_API\\wwwroot\\",
+      "BasePath": "_content/UrbanDesign_API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}

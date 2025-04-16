@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35617.110
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanDesign_Rhino", "UrbanDesign_Rhino.csproj", "{4A3A5142-391E-446B-A033-D3C8DE8B0471}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMFunctionSourceGenerator", "..\LMFunctionSourceGenerator\LMFunctionSourceGenerator.csproj", "{578AD4AB-09FD-6076-020B-6D22A93FF57E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rhino.compute", "..\..\compute.rhino3d\src\rhino.compute\rhino.compute.csproj", "{A5905855-39B0-2F9A-166F-B148EA81AFF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanDesign_API", "..\Parcellation_API\UrbanDesign_API.csproj", "{A967BBE3-55DD-4780-B9C7-BCFF37C40160}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryEngine", "..\..\GeometryEngine\GeometryEngine.csproj", "{365AAC69-BDD8-4A71-8005-6D9F20614ECC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UrbanDesign.Core", "..\Parcellation.Core\UrbanDesign.Core.csproj", "{B105E03C-D9BB-467F-8B70-B9BD10B23425}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A3A5142-391E-446B-A033-D3C8DE8B0471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A3A5142-391E-446B-A033-D3C8DE8B0471}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A3A5142-391E-446B-A033-D3C8DE8B0471}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A3A5142-391E-446B-A033-D3C8DE8B0471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{578AD4AB-09FD-6076-020B-6D22A93FF57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{578AD4AB-09FD-6076-020B-6D22A93FF57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{578AD4AB-09FD-6076-020B-6D22A93FF57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{578AD4AB-09FD-6076-020B-6D22A93FF57E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5905855-39B0-2F9A-166F-B148EA81AFF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5905855-39B0-2F9A-166F-B148EA81AFF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5905855-39B0-2F9A-166F-B148EA81AFF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5905855-39B0-2F9A-166F-B148EA81AFF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A967BBE3-55DD-4780-B9C7-BCFF37C40160}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A967BBE3-55DD-4780-B9C7-BCFF37C40160}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A967BBE3-55DD-4780-B9C7-BCFF37C40160}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A967BBE3-55DD-4780-B9C7-BCFF37C40160}.Release|Any CPU.Build.0 = Release|Any CPU
+		{365AAC69-BDD8-4A71-8005-6D9F20614ECC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{365AAC69-BDD8-4A71-8005-6D9F20614ECC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{365AAC69-BDD8-4A71-8005-6D9F20614ECC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{365AAC69-BDD8-4A71-8005-6D9F20614ECC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B105E03C-D9BB-467F-8B70-B9BD10B23425}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B105E03C-D9BB-467F-8B70-B9BD10B23425}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B105E03C-D9BB-467F-8B70-B9BD10B23425}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B105E03C-D9BB-467F-8B70-B9BD10B23425}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4B27748A-1E33-4309-91CC-3843ED6E1E42}
+	EndGlobalSection
+EndGlobal

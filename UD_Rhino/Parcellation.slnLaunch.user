@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Parcellation_API",
+    "Projects": [
+      {
+        "Path": "..\\Parcellation_API\\UrbanDesign_API.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "..\\..\\compute.rhino3d\\src\\rhino.compute\\rhino.compute.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -1,0 +1,10 @@
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\bin\Debug\net48\Parcellation.rhp
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\bin\Debug\net48\Parcellation.pdb
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.csproj.AssemblyReference.cache
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.AssemblyInfoInputs.cache
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.AssemblyInfo.cs
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.csproj.CoreCompileInputs.cache
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.sourcelink.json
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.rhp
+C:\Users\Om\source\repos\Parcellation\Parcellation_Rhino\Parcellation\obj\Debug\net48\Parcellation.pdb

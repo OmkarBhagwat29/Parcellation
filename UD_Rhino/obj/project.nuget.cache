@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "dgSpecHash": "YJvCQ1NlKeQ=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UrbanDesign_Rhino.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Om\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\9.0.0\\microsoft.bcl.asyncinterfaces.9.0.0.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\microsoft.extensions.ai.abstractions\\9.3.0-preview.1.25161.3\\microsoft.extensions.ai.abstractions.9.3.0-preview.1.25161.3.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\microsoft.web.webview2\\1.0.3124.44\\microsoft.web.webview2.1.0.3124.44.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\microsoft.win32.systemevents\\9.0.3\\microsoft.win32.systemevents.9.0.3.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\ollamasharp\\5.1.9\\ollamasharp.5.1.9.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\rhinocommon\\8.17.25066.7001\\rhinocommon.8.17.25066.7001.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\rhinowindows\\8.17.25066.7001\\rhinowindows.8.17.25066.7001.nupkg.sha512",
+    "C:\\Users\\Om\\.nuget\\packages\\system.drawing.common\\9.0.3\\system.drawing.common.9.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

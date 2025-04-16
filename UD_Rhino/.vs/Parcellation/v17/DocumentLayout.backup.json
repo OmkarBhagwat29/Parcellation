@@ -1,0 +1,747 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\udplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:udplugin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\commands\\parcellationcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:commands\\parcellationcommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\parcellation_ui\\helpers\\commandrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\ui\\parcellation_ui\\helpers\\commandrunner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\models\\webvieweventmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:models\\webvieweventmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\parcellation_ui\\views\\parcellationview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\ui\\parcellation_ui\\views\\parcellationview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\functions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\functions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\parcellation_ui\\viewmodels\\parcellationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\ui\\parcellation_ui\\viewmodels\\parcellationviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\parcellation_ui\\commandaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\ui\\parcellation_ui\\commandaction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\parcellationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|solutionrelative:ud\\parcellation\\parcellationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\flooding\\floodinghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\flooding\\floodinghelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\roadnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\roadnetwork.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\parcel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\simulation\\constraints\\gravityconstraint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\simulation\\constraints\\gravityconstraint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\road.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\road.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\parcelsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\parcelsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\parcellation\\parcellationdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign_Rhino.csproj|solutionrelative:ud\\parcellation\\parcellationdisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\helper\\geometry\\curve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|solutionrelative:helper\\geometry\\curve.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ai\\ollama\\ollamahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|UrbanDesign.csproj|solutionrelative:ai\\ollama\\ollamahelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\webviewbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\ui\\webviewbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\waterbody.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\waterbody.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\transoportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\transoportation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\road.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\road.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\landuse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\landuse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\greenspace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\greenspace.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\typehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\typehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\building.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\building.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\map\\mapsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\map\\mapsystem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\waterbodytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\waterbodytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\transportationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\transportationtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\transportationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\transportationmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\parktype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\parktype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\landusetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\landusetype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\highwaytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\highwaytype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\helper\\buildingtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\helper\\buildingtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\map\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\ui\\map\\maphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\map\\mapui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\ui\\map\\mapui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|c:\\users\\om\\source\\repos\\parcellation\\parcellation_rhino\\ud\\ui\\map\\mapviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{4A3A5142-391E-446B-A033-D3C8DE8B0471}|Parcellation.csproj|solutionrelative:ud\\ui\\map\\mapviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 2084,
+          "SelectedChildIndex": 18,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e506b91c-c606-466a-90a9-123d1d1e12b3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{57d563b6-44a5-47df-85be-f4199ad6b651}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{26341fe2-71dd-46fd-bb1b-2e51a92a0d64}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "UDPlugin.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UDPlugin.cs",
+              "RelativeDocumentMoniker": "UDPlugin.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UDPlugin.cs",
+              "RelativeToolTip": "UDPlugin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:29:42.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ParcellationCommand.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Commands\\ParcellationCommand.cs",
+              "RelativeDocumentMoniker": "Commands\\ParcellationCommand.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Commands\\ParcellationCommand.cs",
+              "RelativeToolTip": "Commands\\ParcellationCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:29:13.571Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CommandRunner.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\Helpers\\CommandRunner.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Parcellation_UI\\Helpers\\CommandRunner.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\Helpers\\CommandRunner.cs",
+              "RelativeToolTip": "UD\\UI\\Parcellation_UI\\Helpers\\CommandRunner.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:28:59.581Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "WebViewEventModel.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Models\\WebViewEventModel.cs",
+              "RelativeDocumentMoniker": "Models\\WebViewEventModel.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Models\\WebViewEventModel.cs",
+              "RelativeToolTip": "Models\\WebViewEventModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:28:45.163Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ParcellationView.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\Views\\ParcellationView.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Parcellation_UI\\Views\\ParcellationView.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\Views\\ParcellationView.cs",
+              "RelativeToolTip": "UD\\UI\\Parcellation_UI\\Views\\ParcellationView.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:28:27.849Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "CommandAction.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\CommandAction.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Parcellation_UI\\CommandAction.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\CommandAction.cs",
+              "RelativeToolTip": "UD\\UI\\Parcellation_UI\\CommandAction.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:27:51.018Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ParcellationViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\ViewModels\\ParcellationViewModel.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Parcellation_UI\\ViewModels\\ParcellationViewModel.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Parcellation_UI\\ViewModels\\ParcellationViewModel.cs",
+              "RelativeToolTip": "UD\\UI\\Parcellation_UI\\ViewModels\\ParcellationViewModel.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAqwF0AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:26:37.126Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Functions.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Functions.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\Functions.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Functions.cs",
+              "RelativeToolTip": "UD\\Parcellation\\Functions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:26:15.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "FloodingHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Flooding\\FloodingHelper.cs",
+              "RelativeDocumentMoniker": "UD\\Flooding\\FloodingHelper.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Flooding\\FloodingHelper.cs",
+              "RelativeToolTip": "UD\\Flooding\\FloodingHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:52.121Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "GravityConstraint.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Simulation\\Constraints\\GravityConstraint.cs",
+              "RelativeDocumentMoniker": "UD\\Simulation\\Constraints\\GravityConstraint.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Simulation\\Constraints\\GravityConstraint.cs",
+              "RelativeToolTip": "UD\\Simulation\\Constraints\\GravityConstraint.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:37.321Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RoadNetwork.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\RoadNetwork.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\RoadNetwork.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\RoadNetwork.cs",
+              "RelativeToolTip": "UD\\Parcellation\\RoadNetwork.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:28.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Road.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Road.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\Road.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Road.cs",
+              "RelativeToolTip": "UD\\Parcellation\\Road.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:24.007Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ParcelSystem.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcelSystem.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\ParcelSystem.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcelSystem.cs",
+              "RelativeToolTip": "UD\\Parcellation\\ParcelSystem.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:17.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Parcel.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Parcel.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\Parcel.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\Parcel.cs",
+              "RelativeToolTip": "UD\\Parcellation\\Parcel.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAtwCAAAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:03.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "ParcellationHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcellationHelper.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\ParcellationHelper.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcellationHelper.cs",
+              "RelativeToolTip": "UD\\Parcellation\\ParcellationHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:23:31.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "ParcellationDisplay.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcellationDisplay.cs",
+              "RelativeDocumentMoniker": "UD\\Parcellation\\ParcellationDisplay.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Parcellation\\ParcellationDisplay.cs",
+              "RelativeToolTip": "UD\\Parcellation\\ParcellationDisplay.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:25:08.43Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "Curve.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Helper\\Geometry\\Curve.cs",
+              "RelativeDocumentMoniker": "Helper\\Geometry\\Curve.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\Helper\\Geometry\\Curve.cs",
+              "RelativeToolTip": "Helper\\Geometry\\Curve.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:23:25.225Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "OllamaHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\AI\\Ollama\\OllamaHelper.cs",
+              "RelativeDocumentMoniker": "AI\\Ollama\\OllamaHelper.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\AI\\Ollama\\OllamaHelper.cs",
+              "RelativeToolTip": "AI\\Ollama\\OllamaHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T21:23:07.772Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "WaterBody.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\WaterBody.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\WaterBody.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\WaterBody.cs",
+              "RelativeToolTip": "UD\\Map\\WaterBody.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:10:39.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "Building.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Building.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\Building.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Building.cs",
+              "RelativeToolTip": "UD\\Map\\Building.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAzAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:09:43.427Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "LanduseType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\LanduseType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\LanduseType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\LanduseType.cs",
+              "RelativeToolTip": "UD\\Helper\\LanduseType.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAkwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:05:48.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "HighwayType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\HighwayType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\HighwayType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\HighwayType.cs",
+              "RelativeToolTip": "UD\\Helper\\HighwayType.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAkwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:05:30.909Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "BuildingType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\BuildingType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\BuildingType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\BuildingType.cs",
+              "RelativeToolTip": "UD\\Helper\\BuildingType.cs",
+              "ViewState": "AgIAAGIAAAAAAAAAAAAkwGoAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:05:23.22Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ParkType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\ParkType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\ParkType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\ParkType.cs",
+              "RelativeToolTip": "UD\\Helper\\ParkType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:04:06.277Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "GreenSpace.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\GreenSpace.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\GreenSpace.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\GreenSpace.cs",
+              "RelativeToolTip": "UD\\Map\\GreenSpace.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA4AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T16:54:38.534Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Transoportation.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Transoportation.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\Transoportation.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Transoportation.cs",
+              "RelativeToolTip": "UD\\Map\\Transoportation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T16:54:13.222Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "TypeHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TypeHelper.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\TypeHelper.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TypeHelper.cs",
+              "RelativeToolTip": "UD\\Helper\\TypeHelper.cs",
+              "ViewState": "AgIAAMUAAAAAAAAAAAA6wAEBAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T16:51:47.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "WebViewBase.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\WebViewBase.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\WebViewBase.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\WebViewBase.cs",
+              "RelativeToolTip": "UD\\UI\\WebViewBase.cs",
+              "ViewState": "AgIAACoAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T06:34:37.725Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "Landuse.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Landuse.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\Landuse.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Landuse.cs",
+              "RelativeToolTip": "UD\\Map\\Landuse.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:10:13.658Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Road.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Road.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\Road.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\Road.cs",
+              "RelativeToolTip": "UD\\Map\\Road.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T16:53:55.989Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "TransportationModel.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TransportationModel.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\TransportationModel.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TransportationModel.cs",
+              "RelativeToolTip": "UD\\Helper\\TransportationModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:06:19.545Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "MapSystem.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\MapSystem.cs",
+              "RelativeDocumentMoniker": "UD\\Map\\MapSystem.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Map\\MapSystem.cs",
+              "RelativeToolTip": "UD\\Map\\MapSystem.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAwwEwAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T16:50:07.967Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "TransportationType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TransportationType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\TransportationType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\TransportationType.cs",
+              "RelativeToolTip": "UD\\Helper\\TransportationType.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAqwBYAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:06:21.537Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "WaterBodyType.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\WaterBodyType.cs",
+              "RelativeDocumentMoniker": "UD\\Helper\\WaterBodyType.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\Helper\\WaterBodyType.cs",
+              "RelativeToolTip": "UD\\Helper\\WaterBodyType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-16T17:06:37.25Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "MapHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapHelper.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Map\\MapHelper.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapHelper.cs",
+              "RelativeToolTip": "UD\\UI\\Map\\MapHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T15:45:52.386Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "MapUi.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapUi.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Map\\MapUi.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapUi.cs",
+              "RelativeToolTip": "UD\\UI\\Map\\MapUi.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAqwCMAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T15:38:17.678Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "MapViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapViewModel.cs",
+              "RelativeDocumentMoniker": "UD\\UI\\Map\\MapViewModel.cs",
+              "ToolTip": "C:\\Users\\Om\\source\\repos\\Parcellation\\Parcellation_Rhino\\UD\\UI\\Map\\MapViewModel.cs",
+              "RelativeToolTip": "UD\\UI\\Map\\MapViewModel.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAEBVwCoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-15T15:16:00.229Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 315,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{0504ff91-9d61-11d0-a794-00a0c9110051}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{4a18f9d0-b838-11d0-93eb-00a0c90f2734}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{f2e84780-2af1-11d1-a7fa-00a0c9110051}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
